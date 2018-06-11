@@ -1,0 +1,8 @@
+#goal definition
+int32 openLeftDoor
+---
+#result definition
+int32 observation
+---
+#feedback
+string status
