@@ -1,0 +1,9 @@
+<launch>
+
+	<node name="Calculating_pomdp_server" pkg="pomdp" type="Calculating_pomdp_server.py" output="screen"/>
+	<node name="observe" pkg="pomdp" type="Observe_server.py" output="screen"/>
+	<node name="open_left" pkg="pomdp" type="Open_Left_server.py" output="screen"/>
+	<node name="open_right" pkg="pomdp" type="Open_Right_server.py" output="screen" />
+	<node name="master_client" pkg="pomdp" type="MasterClient.py" output="screen" />
+
+</launch>

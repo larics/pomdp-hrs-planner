@@ -26,7 +26,7 @@ class OpenRightAction(object):
 		#tiger is left, you opened left door
         	rospy.loginfo('%s: Executing, LOST : opened right door and tiger is right' % (self._action_name))
 	else:
-		rospy.loginfo('%s: Executing, WON : opened left door and tiger is right' % (self._action_name))
+		rospy.loginfo('%s: Executing, WON : opened right door and tiger is left' % (self._action_name))
         
         # start executing the action 
 	self._result.observation = round (random.uniform(0,1))

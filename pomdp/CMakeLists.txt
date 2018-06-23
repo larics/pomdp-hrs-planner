@@ -19,6 +19,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
  find_package(Boost REQUIRED COMPONENTS system)
 
+ find_package(catkin REQUIRED COMPONENTS roslaunch)
+   roslaunch_add_file_check(launch)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -120,48 +122,6 @@ include_directories(
  include
   ${catkin_INCLUDE_DIRS}
 )
-
-##add_executable(master_client scripts/MasterClient.py)
-#add_executable(observe_server scripts/Observe_server.py)
-#add_executable(openLeft_server scripts/Open_Left_server.py)
-#add_executable(openRight_server scripts/Open_Right_server.py)
-
-#target_link_libraries(
-#  master_client
-#  ${catkin_LIBRARIES}
-#)
-
-#target_link_libraries(
-#  observe_server
-#  ${catkin_LIBRARIES}
-#)
-
-#target_link_libraries(
-#  openLeft_server
-#  ${catkin_LIBRARIES}
-#)
-
-#target_link_libraries(
-#  openRight_server
-#  ${catkin_LIBRARIES}
-#)
-
-#add_dependencies(
-#  master_client
-#  ${pomdp_EXPORTED_TARGETS}
-#)
-#add_dependencies(
-#  observe_server
-#  ${pomdp_EXPORTED_TARGETS}
-#)
-#add_dependencies(
-#  openLeft_server
-#  ${pomdp_EXPORTED_TARGETS}
-#)
-#add_dependencies(
-#  openRight_server
-#  ${pomdp_EXPORTED_TARGETS}
-#)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

@@ -85,7 +85,7 @@ class POMDP:
 
 if __name__ == "__main__":
     ## This is relative path to POMDPx and Policy files.
-    pomdp_server = POMDP('examples/Tiger.pomdpx', 'examples/Tiger.policy')
+    pomdp_server = POMDP('/home/nina/catkin_ws/src/pomdp/examples/Tiger.pomdpx', '/home/nina/catkin_ws/src/pomdp/examples/Tiger.policy')
     pomdp_server.start()
 
 
