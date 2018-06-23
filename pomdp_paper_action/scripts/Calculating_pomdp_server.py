@@ -84,8 +84,8 @@ class POMDP:
     	rospy.spin()
 
 if __name__ == "__main__":
-    ## This is relative path to POMDPx and Policy files.
-    pomdp_server = POMDP('examples/paper.pomdpx', 'examples/paper.policy')
+    ## This is path to POMDPx and Policy files.
+    pomdp_server = POMDP('/home/nina/catkin_ws/src/pomdp_paper_action/examples/paper.pomdpx', '/home/nina/catkin_ws/src/pomdp_paper_action/examples/paper.policy')
     pomdp_server.start()
 
 

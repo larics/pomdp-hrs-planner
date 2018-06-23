@@ -33,6 +33,7 @@ class ListenAction(object):
         # publish info to the console for the user
         rospy.loginfo('%s: Executing, listening' % (self._action_name))
         self.listener()
+        rospy.sleep(1)
 
         #calculate distance between drone and beacon
         distance = round(math.sqrt( (goal.input[1]-self.beacony)**2 + (goal.input[0]-self.beaconx)**2),1)
