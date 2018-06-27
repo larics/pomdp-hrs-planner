@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from pomdp_paper_action.srv import *
+from paper_extended.srv import *
 import rospy
 import pomdpy_parser as parser
 import numpy as np
@@ -78,15 +78,14 @@ class POMDP:
 
 
     def start(self):
-    	rospy.init_node('Calculating_pomdp_server')    
-	s = rospy.Service('Calculating_pomdp', CalculatingNewAction, self.handle_observation)
-    	print "Ready for new data."
-    	rospy.spin()
+        rospy.init_node('Calculating_pomdp_server')
+        s = rospy.Service('Calculating_pomdp', CalculatingNewAction, self.handle_observation)
+        print "Ready for new data."
+        rospy.spin()
 
 if __name__ == "__main__":
-    ## This is path to POMDPx and Policy files.
-    #pomdp_server = POMDP($(readlink -f $(find -wholename */pomdp_paper_action/examples/paper.pomdpx)), $(readlink -f $(find -wholename */pomdp_paper_action/examples/paper.policy)))
-    pomdp_server = POMDP('/home/nina/catkin_ws/src/pomdp_paper_action/examples/paper.pomdpx', '/home/nina/catkin_ws/src/pomdp_paper_action/examples/paper.policy')
+    ## This is relative path to POMDPx and Policy files.
+    pomdp_server = POMDP('/home/nina/catkin_ws/src/paper_extended/examples/paperExtendedVersion4.pomdpx', '/home/nina/catkin_ws/src/paper_extended/examples/paperExtendedVersion4.policy')
     pomdp_server.start()
 
 

@@ -1,0 +1,8 @@
+#goal definition
+float64[] input
+---
+#result definition
+int32 observation
+---
+#feedback
+string status

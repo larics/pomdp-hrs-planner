@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+ 	
+	
+	<pomdpx version='0.1' id='Version4' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='pomdpx.xsd'>
+	
+	
+<Description>This is a POMDPX file that describes 2 robots world</Description>	
+<Discount>0.87</Discount>		  	
+	
+<Variable>	
+	
+<StateVar vnamePrev="state_0" vnameCurr="state_1" fullyObs="false">	
+<ValueEnum>REBL REBM REBH ROBL ROBM ROBH</ValueEnum>	
+</StateVar>	
+	
+<ObsVar vname="obs_sensor">	
+<ValueEnum>Obs-emp Obs-occ</ValueEnum>	
+</ObsVar>	
+	
+<ActionVar vname="action_agent">	
+<ValueEnum>EntRoAPrMob EntRoAPrAer Obs Proc</ValueEnum>	
+</ActionVar>	
+	
+<RewardVar vname="reward_agent"/>	
+</Variable>	
+	
+	
+<InitialStateBelief>	
+<CondProb>	
+<Var>state_0</Var>	
+<Parent>null</Parent>	
+<Parameter type = "TBL">	
+<Entry>	
+<Instance>-</Instance>	
+<ProbTable>0.0 0.0 0.5 0.0 0.0 0.5</ProbTable>
+ 	
+</Entry>	
+</Parameter>	
+</CondProb>	
+</InitialStateBelief><StateTransitionFunction>
+ 	
+<CondProb>	
+<Var>state_1</Var>	
+<Parent>action_agent state_0</Parent>	
+<Parameter type = "TBL">
+<Entry>
+<Instance>EntRoAPrMob * * </Instance>
+<ProbTable>
+0.4 0.1 0 0.4 0.1 0
+0 0.4 0.1 0 0.4 0.1
+0 0 0.5 0 0 0.5
+0.4 0.1 0 0.4 0.1 0
+0 0.4 0.1 0 0.4 0.1
+0 0 0.5 0 0 0.5
+</ProbTable></Entry>
+<Entry>
+<Instance>EntRoAPrAer * * </Instance>
+<ProbTable>
+0.5 0 0 0.5 0 0
+0.2 0.3 0 0.2 0.3 0
+0 0.2 0.3 0 0.2 0.3
+0.5 0 0 0.5 0 0
+0.2 0.3 0 0.2 0.3 0
+0 0.2 0.3 0 0.2 0.3
+</ProbTable></Entry>
+<Entry>
+<Instance>Obs - - </Instance>
+<ProbTable>
+0.7 0.3 0 0 0 0
+0 0.8 0.2 0 0 0
+0 0 1 0 0 0
+0 0 0 0.7 0.3 0
+0 0 0 0 0.8 0.2
+0 0 0 0 0 1
+</ProbTable></Entry>
+<Entry>
+<Instance>Proc - - </Instance>
+<ProbTable>
+0.35 0.15 0 0.35 0.15 0
+0 0.4 0.1 0 0.4 0.1
+0 0 0.5 0 0 0.5
+0.35 0.15 0 0.35 0.15 0
+0 0.4 0.1 0 0.4 0.1
+0 0 0.5 0 0 0.5
+</ProbTable></Entry>	
+</Parameter>	
+</CondProb>	
+</StateTransitionFunction>
+
+<ObsFunction>
+ 	
+<CondProb>	
+<Var>obs_sensor</Var>	
+<Parent>action_agent state_1</Parent>	
+<Parameter type = "TBL">
+<Entry>
+<Instance>EntRoAPrMob * * </Instance>
+<ProbTable>
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+</ProbTable></Entry>
+<Entry>
+<Instance>EntRoAPrAer * * </Instance>
+<ProbTable>
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+</ProbTable></Entry>
+<Entry>
+<Instance>Obs - - </Instance>
+<ProbTable>
+1 0
+1 0
+1 0
+0.2 0.8
+0.2 0.8
+0.2 0.8
+</ProbTable></Entry>
+<Entry>
+<Instance>Proc - - </Instance>
+<ProbTable>
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+0.5 0.5
+</ProbTable></Entry>	
+</Parameter>	
+</CondProb>	
+</ObsFunction>
+
+<RewardFunction>
+ 	
+<Func>	
+<Var>reward_agent</Var>	
+<Parent>action_agent state_0</Parent>	
+<Parameter type = "TBL">
+<Entry>
+<Instance>EntRoAPrMob REBL</Instance>
+<ValueTable>250</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrMob REBM</Instance>
+<ValueTable>150</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrMob REBH</Instance>
+<ValueTable>50</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrMob ROBL</Instance>
+<ValueTable>-400</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrMob ROBM</Instance>
+<ValueTable>-500</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrMob ROBH</Instance>
+<ValueTable>-600</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrAer REBL</Instance>
+<ValueTable>40</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrAer REBM</Instance>
+<ValueTable>110</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrAer REBH</Instance>
+<ValueTable>150</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrAer ROBL</Instance>
+<ValueTable>-600</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrAer ROBM</Instance>
+<ValueTable>-500</ValueTable></Entry>
+<Entry>
+<Instance>EntRoAPrAer ROBH</Instance>
+<ValueTable>-400</ValueTable></Entry>
+<Entry>
+<Instance>Obs REBL</Instance>
+<ValueTable>-4.4</ValueTable></Entry>
+<Entry>
+<Instance>Obs REBM</Instance>
+<ValueTable>-4.6</ValueTable></Entry>
+<Entry>
+<Instance>Obs REBH</Instance>
+<ValueTable>-5</ValueTable></Entry>
+<Entry>
+<Instance>Obs ROBL</Instance>
+<ValueTable>-4.4</ValueTable></Entry>
+<Entry>
+<Instance>Obs ROBM</Instance>
+<ValueTable>-4.6</ValueTable></Entry>
+<Entry>
+<Instance>Obs ROBH</Instance>
+<ValueTable>-5</ValueTable></Entry>
+<Entry>
+<Instance>Proc REBL</Instance>
+<ValueTable>-44</ValueTable></Entry>
+<Entry>
+<Instance>Proc REBM</Instance>
+<ValueTable>-46</ValueTable></Entry>
+<Entry>
+<Instance>Proc REBH</Instance>
+<ValueTable>-50</ValueTable></Entry>
+<Entry>
+<Instance>Proc ROBL</Instance>
+<ValueTable>-44</ValueTable></Entry>
+<Entry>
+<Instance>Proc ROBM</Instance>
+<ValueTable>-46</ValueTable></Entry>
+<Entry>
+<Instance>Proc ROBH</Instance>
+<ValueTable>-50</ValueTable></Entry>	
+</Parameter>	
+</Func>	
+</RewardFunction></pomdpx>

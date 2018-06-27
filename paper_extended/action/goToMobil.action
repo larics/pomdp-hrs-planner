@@ -1,0 +1,8 @@
+#goal definition
+float64[] goToPositionxyVelocity
+---
+#result definition
+int32 observation
+---
+#feedback
+float64[] currentPosition
