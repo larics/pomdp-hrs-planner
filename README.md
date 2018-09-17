@@ -1,5 +1,5 @@
 # Diplomski
-This is a repository that contains code for solving two different problems using POMDP-s. Problems are solved using ROS Kinetic and Python and simulated using Gazebo. 
+This is a repository that contains code for solving three different problems using POMDP-s. Problems are solved using ROS Kinetic and Python and simulated using Gazebo. 
 ## Installation
 To install ROS Kinetic please follow instructions from:
 http://wiki.ros.org/kinetic/Installation
@@ -24,3 +24,6 @@ https://smartech.gatech.edu/bitstream/handle/1853/21555/POMDP-FLAIRS.pdf
 To run the simulation in Gazebo world with one UAV use:
 
 >$ roslaunch pomdp_paper_action paper.launch
+
+### pomdp_paper_extended
+This folder contains solution of the paper mentioned before using UAV and mobile robot
