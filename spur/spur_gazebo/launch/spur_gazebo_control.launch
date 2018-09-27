@@ -1,0 +1,19 @@
+<launch>
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find spur_gazebo)/config/spur_gazebo_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager"
+        type="spawner" respawn="false"
+        output="screen" ns="/spur" args="joint_state_controller
+                                         bl_wheel_joint_velocity_controller
+                                         br_wheel_joint_velocity_controller
+                                         fl_wheel_joint_velocity_controller
+                                         fr_wheel_joint_velocity_controller
+                                         bl_rotation_joint_position_controller
+                                         br_rotation_joint_position_controller
+                                         fl_rotation_joint_position_controller
+                                         fr_rotation_joint_position_controller
+                                         "/>
+
+</launch>
