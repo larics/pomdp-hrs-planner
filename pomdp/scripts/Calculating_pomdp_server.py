@@ -66,6 +66,10 @@ class POMDP:
 
         return self.belief
 
+    ## Documentation for method
+    ## This method implements request-response relation, where request is observation and response new optimal action
+    ## @param self The object pointer
+    ## @param req Request defined in .srv file
     def handle_observation(self, req):
         global Act
         print "And I got observation %s"%(req.Obs)
@@ -78,13 +82,13 @@ class POMDP:
 
 
     def start(self):
-    	rospy.init_node('Calculating_pomdp_server')    
-	s = rospy.Service('Calculating_pomdp', CalculatingNewAction, self.handle_observation)
-    	print "Ready for new data."
-    	rospy.spin()
+        rospy.init_node('Calculating_pomdp_server')
+        s = rospy.Service('Calculating_pomdp', CalculatingNewAction, self.handle_observation)
+        print "Ready for new data."
+        rospy.spin()
 
 if __name__ == "__main__":
-    ## This is relative path to POMDPx and Policy files.
+    ## This is path to POMDPx and Policy files.
     pomdp_server = POMDP('/home/nina/catkin_ws/src/pomdp/examples/Tiger.pomdpx', '/home/nina/catkin_ws/src/pomdp/examples/Tiger.policy')
     pomdp_server.start()
 

@@ -14,28 +14,29 @@ class OpenRightAction(object):
         self._action_name = name
         self._as = actionlib.SimpleActionServer(self._action_name, pomdp.msg.Open_RightAction, execute_cb=self.execute_cb, auto_start = False)
         self._as.start()
-      
-	#just send random observation
+
     def execute_cb(self, goal):
+        #param goal:int, represents tigers position
         success = True
         # send status
         self._feedback.status='opening right door'
 
         # publish info to the console for the user
-	if goal==1:
-		#tiger is left, you opened left door
+        if goal==1:
+            #tiger is right, you opened right door
         	rospy.loginfo('%s: Executing, LOST : opened right door and tiger is right' % (self._action_name))
-	else:
-		rospy.loginfo('%s: Executing, WON : opened right door and tiger is left' % (self._action_name))
-        
-        # start executing the action 
-	self._result.observation = round (random.uniform(0,1))
+        else:
+            #tiger is left, you opened right door
+            rospy.loginfo('%s: Executing, WON : opened right door and tiger is left' % (self._action_name))
+
+        #just send random observation
+	    self._result.observation = round (random.uniform(0,1))
 
             # check that preempt has not been requested by the client
         if self._as.is_preempt_requested():
-		rospy.loginfo('%s: Preempted' % self._action_name)
-                self._as.set_preempted()
-                success = False
+            rospy.loginfo('%s: Preempted' % self._action_name)
+            self._as.set_preempted()
+            success = False
           
         if success:
             rospy.loginfo('%s: Succeeded' % self._action_name)

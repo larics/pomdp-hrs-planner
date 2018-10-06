@@ -14,9 +14,9 @@ class ObserveAction(object):
         self._action_name = name
         self._as = actionlib.SimpleActionServer(self._action_name, pomdp.msg.ObserveAction, execute_cb=self.execute_cb, auto_start = False)
         self._as.start()
-      
-	#if goal==0 tiger is left, otherwise right
+
     def execute_cb(self, goal):
+        #param goal:int, represents tigers position
         success = True
         # send status
         self._feedback.status='listening'
@@ -24,17 +24,18 @@ class ObserveAction(object):
         rospy.loginfo('%s: Executing, listening' % (self._action_name))
         
         # start executing the action 
-	#in 85% of the cases send good observation	
-	if int(random.uniform(0, 100))<85:
-		self._result.observation=goal.tigerPosition
-	else:
-		self._result.observation=int(not goal.tigerPosition)
+	    #in 85% of the cases send good observation
+        #if goal==0 tiger is left, otherwise right
+        if int(random.uniform(0, 100))<85:
+            self._result.observation=goal.tigerPosition
+        else:
+            self._result.observation=int(not goal.tigerPosition)
 
             # check that preempt has not been requested by the client
         if self._as.is_preempt_requested():
-		rospy.loginfo('%s: Preempted' % self._action_name)
-                self._as.set_preempted()
-                success = False
+            rospy.loginfo('%s: Preempted' % self._action_name)
+            self._as.set_preempted()
+            success = False
           
         if success:
             rospy.loginfo('%s: Succeeded' % self._action_name)

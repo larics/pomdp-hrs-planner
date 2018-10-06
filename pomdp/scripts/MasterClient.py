@@ -58,29 +58,31 @@ if __name__ == "__main__":
 
        while loop==True:
            action = Calculating_pomdp_client(observation)
-	   print("Action : ", action)
+           print("Action : ", action)
            if action==0:
               #do action listen
               try:
                   obs = Observe_client(tigerPos)
-		  observation = obs.observation 
+                  observation = obs.observation
                   print("Observation ",(observation))
               except rospy.ROSInterruptException:
                   print("program interrupted before completion", file=sys.stderr)
 
            if action==1:
+               #tiger is right
               try:
                   obs = Open_left_client(tigerPos)
-		  observation = obs.observation
+                  observation = obs.observation
                   print("Observation :",(observation))
               except rospy.ROSInterruptException:
                   print("program interrupted before completion", file=sys.stderr)
               loop=False
 
-           if action==2:               
+           if action==2:
+               #tiger is left
                try:
                    obs = Open_right_client(tigerPos)
-		   observation = obs.observation
+                   observation = obs.observation
                    print("Obsevation :",(observation))
                except rospy.ROSInterruptException:
                    print("program interrupted before completion", file=sys.stderr)
