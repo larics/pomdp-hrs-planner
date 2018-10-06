@@ -43,6 +43,7 @@ if __name__ == "__main__":
    room = [0,0,0,0,0,0]
    observation=-1
    roomIndex=0
+   #exact positions in our world in Gazebo
    roomMatrix = [[-3.0,1,0,5],[-3,1,5,10],[-3,1,10,15],[6,10,10,15],[6,10,5,10],[6,10,0,5]]
    #position for listening
    roomListening = [[2,2.5],[2,7.5],[2,12.5],[5,12.5],[5,7.5],[5,2.5]]
@@ -50,7 +51,7 @@ if __name__ == "__main__":
    roomEnter = [[2,2.5],[2,7.5],[2,12.5],[5,12.5],[5,7.5],[5,2.5]]
    #enter room position
    for i in range(6):
-   	roomEnter[i] = [roomMatrix[i][0]+0.5*(roomMatrix[i][1]-roomMatrix[i][0]),roomMatrix[i][2]+ 0.5*(roomMatrix[i][3]-roomMatrix[i][2])]
+       roomEnter[i] = [roomMatrix[i][0]+0.5*(roomMatrix[i][1]-roomMatrix[i][0]),roomMatrix[i][2]+ 0.5*(roomMatrix[i][3]-roomMatrix[i][2])]
 
    #inicijalizacija rosnoda
    rospy.init_node('Master_client')
@@ -58,6 +59,7 @@ if __name__ == "__main__":
    #send drone to the start position
    result = goTo_client(startPosition)
    print("Dosao sam na pocetnu poziciju", result)
+   rospy.sleep(3)
    result = goTo_client(roomListening[0])
    print("Dosao sam na prvu poziciju za slusanje", result)
 
