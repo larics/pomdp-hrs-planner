@@ -59,13 +59,14 @@ if __name__ == "__main__":
    roomEnter = [[2,2.5],[2,7.5],[2,12.5],[5,12.5],[5,7.5],[5,2.5]]
    #enter room position
    for i in range(6):
-   	roomEnter[i] = [roomMatrix[i][0]+0.5*(roomMatrix[i][1]-roomMatrix[i][0]),roomMatrix[i][2]+ 0.5*(roomMatrix[i][3]-roomMatrix[i][2])]
+       roomEnter[i] = [roomMatrix[i][0]+0.5*(roomMatrix[i][1]-roomMatrix[i][0]),roomMatrix[i][2]+ 0.5*(roomMatrix[i][3]-roomMatrix[i][2])]
 
    rospy.init_node('Master_client')
   
    #send drone and mobile robot to the start position
    result = goToMobil_client(startPosition)
    print("Dosao sam na pocetnu poziciju", result)
+   rospy.sleep(5)
    result = goToMobil_client(roomListening[0])
    print("Dosao sam na prvu poziciju za slusanje", result)
 

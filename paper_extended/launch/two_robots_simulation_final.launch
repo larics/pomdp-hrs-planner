@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<launch>
+
+<arg name="args" default=""/>
+  
+  <include file="$(find larics_gazebo_worlds)/launch/start.launch">
+    <arg name="world" value="$(find larics_gazebo_worlds)/worlds/floor_plan_simple.world"/>
+    <arg name="args" default="$(arg args)"/>
+</include>
+
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="sec_idle" default="1.0" />
+  <arg name="use_base_odom" default="false" />
+
+  <!--arg name="visualize_laser" default="false" -->
+  <arg name="model" value="$(find spur_description)/urdf/spur.urdf.xacro"  />
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-x 0.0 -y 0.0 -z 0.01 -unpause -urdf -model spur -param robot_description" />
+
+  <include file="$(find spur_bringup)/launch/minimal.launch" >
+    <arg name="sec_idle" value="$(arg sec_idle)"/>
+    <arg name="use_base_odom" value="$(arg use_base_odom)"/>
+    <arg name="use_urg_node" value="false"/>
+    <arg name="use_dynamixel_controller" default="false" />
+    <!--arg name="visualize_laser" value="false"-->
+  </include>
+  <include file="$(find spur_gazebo)/launch/spur_gazebo_control.launch" />
+
+<!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="enable_logging" default="true"/>
+  <arg name="enable_ground_truth" default="true"/>
+  <arg name="log_file" default="vpc_mmcuav"/>
+
+  <arg name="model_type" default="mmcuav" />
+
+  <include file="$(find mmuav_description)/launch/spawn_vpc_mmcuav.launch">
+    <arg name="model_type" value="$(arg model_type)" />
+  </include>
+  
+   <!-- Start control -->
+  <include file="$(find mmuav_control)/launch/vpc_mmcuav_control.launch"/>
+
+  <!-- Start attitude height control -->
+<include file="$(find mmuav_control)/launch/vpc_mmcuav_attitude_position_control.launch"/>
+
+	<node name="Calculating_pomdp_server" pkg="paper_extended" type="Calculating_pomdp_server.py" output="screen"/>
+	<node name="beacon" pkg="paper_extended" type="beacon.py" output="screen"/>
+	<node name="goToAer" pkg="paper_extended" type="goToAerServer.py" output="screen"/>
+	<node name="goToMobil" pkg="paper_extended" type="goToMobilServerFinal.py" output="screen"/>
+	<node name="listen" pkg="paper_extended" type="ListenServer.py" output="screen"/>
+	<node name="Master_client" pkg="paper_extended" type="MasterClient.py" output="screen"/>
+
+</launch>

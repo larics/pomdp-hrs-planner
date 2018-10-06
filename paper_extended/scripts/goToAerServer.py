@@ -26,15 +26,15 @@ class goToAerAction(object):
         pub = rospy.Publisher('/vpc_mmcuav/pose_ref', Pose, queue_size=2)
         msg = Pose()
         msg.position.x, msg.position.y = goal.goToPositionxy[0], goal.goToPositionxy[1]
-        msg.position.z, msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w = 1.0, 0.0, 0.0, 0.0, 0.0
+        msg.position.z, msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w = 0.4, 0.0, 0.0, 0.0, 0.0
         pub.publish(msg)
 
     def execute_cb(self, goal):
         success = True
-	self.listener()
+        self.listener()
         self.talker(goal)
         go = goal.goToPositionxy
-	rospy.sleep(1)
+        rospy.sleep(1)
 
         while not((self._feedback.currentPosition[0]==go[0]) and (self._feedback.currentPosition[1]==go[1])):
             self.talker(goal)

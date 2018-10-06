@@ -19,15 +19,15 @@ class ListenAction(object):
 
     def callback(self, data):
         self.rang = round(data.radius,1)
-	self.beaconx = round(data.positionx,1)
-	self.beacony =  round(data.positiony,1)
-	self.observation = data.obser
+        self.beaconx = round(data.positionx,1)
+        self.beacony =  round(data.positiony,1)
+        self.observation = data.obser
 
     def listener(self):
         rospy.Subscriber("/beacon", Senzor, self.callback)
-      
-	#goal= [current drone position]]
+
     def execute_cb(self, goal):
+        #goal= [current drone position]]
         success = True
         self._feedback.status='listening'
         # publish info to the console for the user
@@ -40,15 +40,15 @@ class ListenAction(object):
         
         # start executing the action 
         if (distance>self.rang):
-                self._result.observation = 0
-        else : 	
-		self._result.observation = self.observation
+            self._result.observation = 0
+        else:
+            self._result.observation = self.observation
 
             # check that preempt has not been requested by the client
         if self._as.is_preempt_requested():
-		rospy.loginfo('%s: Preempted' % self._action_name)
-                self._as.set_preempted()
-                success = False
+            rospy.loginfo('%s: Preempted' % self._action_name)
+            self._as.set_preempted()
+            success = False
           
         if success:
             rospy.loginfo('%s: Succeeded' % self._action_name)

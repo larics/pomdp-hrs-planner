@@ -85,7 +85,7 @@ class POMDP:
 
 if __name__ == "__main__":
     ## This is relative path to POMDPx and Policy files.
-    pomdp_server = POMDP('/home/nina/catkin_ws/src/paper_extended/examples/paperExtendedVersion4.pomdpx', '/home/nina/catkin_ws/src/paper_extended/examples/paperExtendedVersion4.policy')
+    pomdp_server = POMDP('/home/nina/catkin_ws/src/paper_extended/examples/paperExtendedVersion5.pomdpx', '/home/nina/catkin_ws/src/paper_extended/examples/paperExtendedVersion5.policy')
     pomdp_server.start()
 
 
