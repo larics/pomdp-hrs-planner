@@ -20,6 +20,8 @@ To download this repository use:
 
 >$ git clone https://github.com/NinaDruzetic/Diplomski/tree/master/paper_extended
 
+>$ git clone https://github.com/NinaDruzetic/Diplomski/tree/master/spur
+
 >$ cd ~/catkin_ws/src
 
 >$ catkin build
