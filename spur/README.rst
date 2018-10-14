@@ -1,8 +1,8 @@
-ROS package suite for `SPUR`, a mobile omni-directional base robot with extensible arm made at `Okada Lab, Tamagawa University (¶ÌÀîÂç³Ø) <http://www.tamagawa.ac.jp/engineering/ims/t_h_okada.html>`_ (a RoboCup@Home contender).
+This folder presents modified version of ROS package suite for `SPUR`, a mobile omni-directional base robot with extensible arm made at `Okada Lab, Tamagawa University (ç‰å·å¤§å­¦) <http://www.tamagawa.ac.jp/engineering/ims/t_h_okada.html>`_ (a RoboCup@Home contender). For this project only base of the robot was used.
 
 See the video on http://wiki.ros.org/spur.
 
-ÆüËÜ¸ì¤Ç¤Î `´Ê°×¥¤¥ó¥¹¥È¡¼¥ëÊıË¡¤Ï¤³¤Á¤é <./README_ja.rst>`_
+æ—¥æœ¬èªã§ã® `ç°¡æ˜“ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ–¹æ³•ã¯ã“ã¡ã‚‰ <./README_ja.rst>`_
 
 .. contents:: Table of Contents
    :depth: 3
