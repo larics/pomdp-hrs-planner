@@ -13,10 +13,15 @@ https://github.com/larics/larics_gazebo_worlds
 To download this repository use:
 
 >$ cd ~/catkin_ws/src
+
 >$ git clone https://github.com/NinaDruzetic/Diplomski/tree/master/pomdp
+
 >$ git clone https://github.com/NinaDruzetic/Diplomski/tree/master/pomdp_paper_action
+
 >$ git clone https://github.com/NinaDruzetic/Diplomski/tree/master/paper_extended
+
 >$ cd ~/catkin_ws/src
+
 >$ catkin build
 
 ## Simulation
