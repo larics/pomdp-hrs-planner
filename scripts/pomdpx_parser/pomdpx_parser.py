@@ -80,8 +80,10 @@ def get_general_info(root):
         states = []
         actions = []
         observations = []
+        state_names = []
         for k in child:
             if k.tag == 'StateVar':
+                state_names.append(k.attrib.get('vnamePrev'))
                 if k[0].tag == 'ValueEnum':
                     states.append(k[0].text.split(' '))
                 else:
@@ -97,7 +99,7 @@ def get_general_info(root):
                 else:
                     observations.append(["o%s" % x for x in range(1, int(k[0].text) + 1)])
 
-    return description, discount, states, actions, observations
+    return description, discount, states, actions, observations, state_names
 
 ## Documentation for a function.
 ## This function uses the root of a parsed XML POMDPx file, parses it and returns initial belief over states.
@@ -118,3 +120,28 @@ def get_initial_belief(root):
             isb_list.append(isb)
 
     return isb_list
+
+
+def get_reward_model(root):
+    _, _, states, actions, _, state_names = get_general_info(root)
+
+    reward_model = []
+    for i in range(len(actions[0])):
+        matrix_array = []
+        for state_set in states:
+            matrix_array.append(np.zeros(len(state_set)))
+        reward_model.append(matrix_array)
+
+    for reward in root.findall('RewardFunction'):
+        for function in reward.findall('Func'):
+            for parent in function.findall('Parent'):
+                state_set_index = state_names.index(parent.text.split(' ')[-1])
+            for param in function.findall('Parameter'):
+                for entry in param.findall('Entry'):
+                    for inst in entry.findall('Instance'):
+                        action, state = inst.text.split(' ')
+                        action_index = actions[0].index(action)
+                        state_index = states[state_set_index].index(state)
+                    for val in entry.findall('ValueTable'):
+                        reward_model[action_index][state_set_index][state_index]=float(val.text)
+    return reward_model, states, actions, state_names
