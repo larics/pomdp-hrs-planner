@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   GetNewAction.srv
+  PredictNextAction.srv
 )
 
 generate_messages()
