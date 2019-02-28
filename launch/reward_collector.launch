@@ -1,0 +1,11 @@
+<launch>
+     <arg name="pomdp_model" default="$(find pomdp_hrs_planner)/config/HRS-planner-4obs.pomdpx" />
+
+    <include file="$(find pomdp_hrs_planner)/launch/multiple_pomdps.launch"/>
+
+ 	<node name="planner" pkg="pomdp_hrs_planner" type="reward_collector.py" output="screen">
+ 		<param name="model" value="$(arg pomdp_model)"/>
+ 		<param name="human_loc" value="2"/>
+ 		<param name="fire_loc" value="4"/>
+ 	</node>
+ </launch>
