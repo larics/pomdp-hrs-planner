@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="name" default="room1" />
+    <group ns="$(arg name)">
+      <node name="observer" pkg="pomdp_hrs_planner" type="room_observation_generator.py" output="screen">
+        <param name="room" value="$(arg name)"/>
+      </node>
+     </group>
+
+</launch>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+	<param name="human_loc" value="room10"/>
+	<param name="fire_loc" value="room2"/>
+	<param name="team_config_file" value="$(find pomdp_hrs_planner)/config/team_abilities.yaml"/>
+	<param name="obs_config_file" value="$(find pomdp_hrs_planner)/config/obs_config.yaml"/>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room1" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room2" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room3" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room4" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room5" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room6" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room7" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room8" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room9" />
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
+		<arg name="name" value="room10" />
+	</include>
+</launch>

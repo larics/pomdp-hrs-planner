@@ -1,0 +1,24 @@
+proximity_map_human:
+  room1: room2, room10
+  room2: room1, room3, room9
+  room3: room2, room4, room8
+  room4: room3, room5, room7
+  room5: room4, room6
+  room6: room5, room7
+  room7: room6, room8, room4
+  room8: room7, room9, room3
+  room9: room8, room10, room2
+  room10: room9, room1
+
+proximity_map_fire:
+  room1: room2
+  room2: room1, room3
+  room3: room2, room4
+  room4: room3, room5
+  room5: room4
+  room6: room7
+  room7: room6, room8
+  room8: room7, room9
+  room9: room8, room10
+  room10: room9
+
