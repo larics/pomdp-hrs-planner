@@ -31,7 +31,7 @@ class ObservationGenerator():
 
 	def start(self):
 		rospy.Subscriber("container", String, self.contain_callback)
-		self.pub = rospy.Publisher('/mission_control', MissionCtrlMsg, queue_size=1)
+		self.pub = rospy.Publisher('/mission_control', MissionCtrlMsg, queue_size=115)
 		self.dummy_obs()
 		rospy.spin()
 
@@ -119,6 +119,7 @@ class ObservationGenerator():
 
 			self.pub.publish(message)
 		else:
+			print("%s clear" % self.room)
 			self.done = True
 
 

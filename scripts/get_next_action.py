@@ -58,7 +58,6 @@ class CopyPOMDP:
 		return self.belief
 
 
-
 class POMDP:
 
 	def __init__(self):
@@ -132,6 +131,7 @@ class POMDP:
 	def handle_get_new_action(self, req):
 		if self.last_action:
 			self.update_belief(self.last_action, req.Obs)
+		# print("Updated belief after action %s and observation %s is: %s" % (self.last_action, req.Obs, self.belief))
 		ActNum = self.get_optimal_action()
 		self.last_action = self.actions[0][ActNum]
 		self.pub.publish(self.last_action)

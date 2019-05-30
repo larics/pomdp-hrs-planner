@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-	<param name="human_loc" value="room10"/>
-	<param name="fire_loc" value="room2"/>
+	<param name="human_loc" value="room2"/>
+	<param name="fire_loc" value="room1"/>
 	<param name="team_config_file" value="$(find pomdp_hrs_planner)/config/team_abilities.yaml"/>
 	<param name="obs_config_file" value="$(find pomdp_hrs_planner)/config/obs_config.yaml"/>
 	<include file="$(find pomdp_hrs_planner)/launch/obs_generator.launch">
