@@ -1,0 +1,24 @@
+<launch>
+	<include file="$(find pomdp_hrs_planner)/launch/multiple_pomdps.launch">
+	</include>
+	<include file="$(find pomdp_hrs_planner)/launch/multiple_obs_generators.launch">
+	</include>
+	<include file="$(find larics_gazebo_worlds)/launch/floor_plan_simple.launch">
+		<arg name="args" value=""/>
+	</include>
+	<include file="$(find husky_gazebo)/launch/spawn_multi_husky.launch">
+	    <arg name="robot_namespace" value="UGV1"/>
+	    <arg name="x" value="5"/>
+	    <arg name="y" value="-12"/>
+	    <arg name="yaw" value="1.5701"/>
+	    <arg name="laser_enabled" value="true"/>
+    </include>
+    <include file="$(find husky_gazebo)/launch/spawn_multi_husky.launch">
+	    <arg name="robot_namespace" value="UGV2"/>
+	    <arg name="x" value="5"/>
+	    <arg name="y" value="-13"/>
+	    <arg name="yaw" value="1.5701"/>
+	    <arg name="laser_enabled" value="true"/>
+    </include>
+	
+</launch>
