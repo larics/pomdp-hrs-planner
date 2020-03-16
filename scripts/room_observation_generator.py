@@ -4,7 +4,7 @@ from std_msgs.msg import String
 import yaml
 import random
 from pomdp_hrs_planner.srv import GetNewAction
-from gpgp_agent.msg import MissionCtrlMsg
+#from gpgp_agent.msg import MissionCtrlMsg
 
 
 class ObservationGenerator():
@@ -31,7 +31,7 @@ class ObservationGenerator():
 
 	def start(self):
 		rospy.Subscriber("container", String, self.contain_callback)
-		self.pub = rospy.Publisher('/mission_control', MissionCtrlMsg, queue_size=115)
+		#self.pub = rospy.Publisher('/mission_control', MissionCtrlMsg, queue_size=115)
 		self.dummy_obs()
 		rospy.spin()
 
@@ -104,7 +104,7 @@ class ObservationGenerator():
 		
 		return obs_human, obs_fire
 
-	def publish_action(self, action):
+	'''def publish_action(self, action):
 		if not action == 'done':
 			message = MissionCtrlMsg()
 			message.type = "NewMission"
@@ -120,7 +120,7 @@ class ObservationGenerator():
 			self.pub.publish(message)
 		else:
 			print("%s clear" % self.room)
-			self.done = True
+			self.done = True '''
 
 
 
