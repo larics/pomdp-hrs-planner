@@ -8,7 +8,7 @@
 
 	<Variable>
 	
-		<StateVar vnamePrev="room_0" vnameCurr="room_1">
+		<StateVar vnamePrev="room_0" vnameCurr="room_1" fullyObs="true">
 			<NumValues>6</NumValues>
 		</StateVar>
 		
