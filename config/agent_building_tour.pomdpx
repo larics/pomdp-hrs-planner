@@ -30,16 +30,26 @@
 		</Variable>
 
 	<InitialStateBelief>
-      	<CondProb>
-         		<Var>room_0</Var>
-         		<Parent>null</Parent>
-         		<Parameter> · · · </Parameter>
-      	</CondProb>
-      	<CondProb>
-         		<Var>fire_0</Var>
-         		<Parent>null</Parent>
-         		<Parameter> · · · </Parameter>
-      	</CondProb>
+        <CondProb>
+            <Var>room_0</Var>
+            <Parent>null</Parent>
+            <Parameter type = "TBL">
+                <Entry>
+                    <Instance>-</Instance>
+                    <ProbTable>0.0 0.0 0.0 0.0 0.0 1.0</ProbTable>
+                </Entry>
+            </Parameter>
+        </CondProb>
+        <CondProb>
+            <Var>fire_0</Var>
+            <Parent>null</Parent>
+            <Parameter type = "TBL">
+                <Entry>
+                    <Instance>-</Instance>
+                    <ProbTable>0.5 0.5 0.5 0.5 0.5 </ProbTable>
+                </Entry>
+            </Parameter>
+        </CondProb>
    	</InitialStateBelief>
 
 <StateTransitionFunction>
@@ -118,7 +128,25 @@
      </StateTransitionFunction>
      
 
-<ObsFunction></ObsFunction>
+	<ObsFunction>        
+		<CondProb>
+            <Var>obs_fire</Var>
+            <Parent>action_room fire_0</Parent>
+            <Parameter type = "TBL">
+                <Entry>
+                    <Instance> * - -</Instance>
+                    <ProbTable>
+                        1.0 0.0 0.0 0.0 0.0
+                        0.0 1.0 0.0 0.0 0.0
+                        0.0 0.0 1.0 0.0 0.0
+                        0.0 0.0 0.0 1.0 0.0
+                        0.0 0.0 0.0 0.0 1.0
+                    </ProbTable>
+                </Entry>
+            </Parameter>
+        </CondProb>
+
+    </ObsFunction>
 
 <RewardFunction></RewardFunction>
 
