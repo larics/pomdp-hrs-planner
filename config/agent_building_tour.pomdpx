@@ -46,7 +46,7 @@
             <Parameter type = "TBL">
                 <Entry>
                     <Instance>-</Instance>
-                    <ProbTable>0.5 0.5 0.5 0.5 0.5 </ProbTable>
+                    <ProbTable>0.2 0.2 0.2 0.2 0.2 </ProbTable>
                 </Entry>
             </Parameter>
         </CondProb>
@@ -145,7 +145,6 @@
                 </Entry>
             </Parameter>
         </CondProb>
-
     </ObsFunction>
 
 <RewardFunction></RewardFunction>
