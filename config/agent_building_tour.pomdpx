@@ -9,11 +9,11 @@
 	<Variable>
 	
 		<StateVar vnamePrev="room_0" vnameCurr="room_1" fullyObs="true">
-			<NumValues>6</NumValues>
+			<NumValues>r1 r2 r3 r4 r5 h</NumValues>
 		</StateVar>
 		
 		<StateVar vnamePrev="fire_0" vnameCurr="fire_1">
-			<NumValues>5</NumValues>
+			<NumValues>f1 f2 f3 f4 f5</NumValues>
 		</StateVar>
 		
 		<ObsVar vname="obs_fire">
@@ -24,7 +24,8 @@
             <ValueEnum>scout1 scout2 scout3 scout4 scout5 end</ValueEnum>
           </ActionVar>
           
-          <RewardVar vname="reward_agent_fire"/>		
+          <RewardVar vname="reward_agent_fire"/>
+          <RewardVar vname="reward_location_agent"/>	
 		
 		</Variable>
 
@@ -145,7 +146,7 @@
 	<ObsFunction>        
 		<CondProb>
             <Var>obs_fire</Var>
-            <Parent>action_room room_1 fire_1</Parent>
+            <Parent>action_room fire_1</Parent>
             <Parameter type = "TBL">
                 <Entry>
                     <Instance> scout1 - -</Instance>
@@ -215,15 +216,253 @@
 <RewardFunction>
 		<Func>
             <Var>reward_agent_fire</Var>
-            <Parent></Parent>
+            <Parent>action_room fire_0</Parent>
             <Parameter type = "TBL">
 		<Entry>
+                <Instance>scout1 f1</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 f1</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 f1</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 f1</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 f1</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end f1</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+          <Entry>
+                <Instance>scout1 f2</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 f2</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 f2</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 f2</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 f2</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end f2</Instance>
+                <ValueTable>2</ValueTable>
                 </Entry>
 		<Entry>
+                <Instance>scout1 f3</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 f3</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 f3</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 f3</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 f3</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end f3</Instance>
+                <ValueTable>2</ValueTable>
                 </Entry>
 		<Entry>
+                <Instance>scout1 f4</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 f4</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 f4</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 f4</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 f4</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end f4</Instance>
+                <ValueTable>2</ValueTable>
                 </Entry>
 		<Entry>
+                <Instance>scout1 f5</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 f5</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 f5</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 f5</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 f5</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end f5</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+            </Parameter>
+        </Func>
+        <Func>
+            <Var>reward_agent_location</Var>
+            <Parent>action_room room_0</Parent>
+            <Parameter type = "TBL">
+		<Entry>
+                <Instance>scout1 r1</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 r1</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 r1</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 r1</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 r1</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end r1</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+          <Entry>
+                <Instance>scout1 r2</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 r2</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 r2</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 r2</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 r2</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end r2</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+		<Entry>
+                <Instance>scout1 r3</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 r3</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 r3</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 r3</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 r3</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end r3</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+		<Entry>
+                <Instance>scout1 r4</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 r4</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 r4</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 r4</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 r4</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end r4</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+		<Entry>
+                <Instance>scout1 r5</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 r5</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 r5</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 r5</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 r5</Instance>
+                <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end r5</Instance>
+                <ValueTable>2</ValueTable>
                 </Entry>
             </Parameter>
         </Func>
