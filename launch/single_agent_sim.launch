@@ -1,24 +1,30 @@
+<?xml version="1.0"?>
 <launch>
- 	<!--<include file="$(find pomdp_hrs_planner)/launch/multiple_pomdps.launch">
+  <param name="human_loc" value="room2"/>
+  <param name="fire_loc" value="room3"/>
+  <param name="team_config_file" value="$(find pomdp_hrs_planner)/config/team_abilities.yaml"/>
+  <param name="obs_config_file" value="$(find pomdp_hrs_planner)/config/obs_config.yaml"/>
+ 	<include file="$(find pomdp_hrs_planner)/launch/single_pomdp.launch">
 	</include>
-	<include file="$(find pomdp_hrs_planner)/launch/multiple_obs_generators.launch">
-	</include>-->
-	<include file="$(find larics_gazebo_worlds)/launch/floor_plan_simple.launch">
+	<node name="observer" pkg="pomdp_hrs_planner" type="fire_observation_generator.py" output="screen">
+        <param name="room" value="fire"/>
+  </node>
+	<!-- <include file="$(find larics_gazebo_worlds)/launch/floor_plan_simple.launch">
 		<arg name="args" value=""/>
 	</include>
 
 	 <include file="$(find mmuav_description)/launch/spawn_uav.launch">
     <arg name="model_type" value="uav" />
     <arg name="name" value="UAV1" />
-    <arg name="x" value="4" />
-    <arg name="y" value="-9" />
+    <arg name="x" value="5" />
+    <arg name="y" value="-12" />
   </include>
 
   <include file="$(find mmuav_control)/launch/rotors_variation_attitude_position_control.launch">
     <arg name="namespace" value="UAV1" />
-    <arg name="x" value="4" />
-    <arg name="y" value="-9" />
-  </include>
+    <arg name="x" value="5" />
+    <arg name="y" value="-12" />
+  </include> -->
 
   <!--<include file="$(find mmuav_description)/launch/spawn_uav.launch">
     <arg name="model_type" value="uav" />
