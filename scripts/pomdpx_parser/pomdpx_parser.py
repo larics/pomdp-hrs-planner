@@ -15,8 +15,10 @@ def import_policy(root):
     for i in root.findall('AlphaVector'):
         policy_vectors_field = []
         best_action_list = []
+        observable_states = []
         for m in i.findall('Vector'):
             best_action_list.append(int(m.attrib['action']))
+            observable_states.append(int(m.attrib['obsValue']))
             pom = m.text.rstrip(' ').split(' ')
             policy_list = []
             for x in pom:
@@ -24,7 +26,7 @@ def import_policy(root):
                 policy_vector = np.array(policy_list)
             policy_vectors_field.append(policy_vector)
 
-    return policy_vectors_field, best_action_list
+    return policy_vectors_field, best_action_list, observable_states
 
 
 ## Documentation for a function.
@@ -33,9 +35,10 @@ def import_policy(root):
 ## @param tag Name of the tag that defines which part of POMDPx wants to be put in dictionary.
 ## @param root Root of XML POMDPx file.
 ## @returns dictionary Dictionary that connects wanted matrices with their transitions or observations.
-def get_matrix(tag, root):
+def get_matrix(tag, root, observability):
     for k in root.findall(tag):
         dict_list = []
+        count = 0
         for m in k.findall('CondProb'):
             dictionary = {}
             for n in m.findall('Parameter'):
@@ -55,7 +58,10 @@ def get_matrix(tag, root):
                                     list1.append(float(y))
                     vector = np.array(list1).reshape(matrix_height, matrix_width)
                     dictionary[key] = vector
+            if tag == 'ObsFunction' and observability[count]:
+                dict_list.append(None)
             dict_list.append(dictionary)
+            count += 1
     return dict_list
 
 
@@ -81,6 +87,7 @@ def get_general_info(root):
         actions = []
         observations = []
         state_names = []
+        observability = []
         for k in child:
             if k.tag == 'StateVar':
                 state_names.append(k.attrib.get('vnamePrev'))
@@ -88,6 +95,11 @@ def get_general_info(root):
                     states.append(k[0].text.split(' '))
                 else:
                     states.append(["s%s" % x for x in range(1, int(k[0].text) + 1)])
+                if k.attrib.get('fullyObs') == 'true':
+                    observability.append(True)
+                    observations.append(None)
+                else:
+                    observability.append(False)
             if k.tag == 'ActionVar':
                 if k[0].tag == 'ValueEnum':
                     actions.append(k[0].text.split(' '))
@@ -99,7 +111,7 @@ def get_general_info(root):
                 else:
                     observations.append(["o%s" % x for x in range(1, int(k[0].text) + 1)])
 
-    return description, discount, states, actions, observations, state_names
+    return description, discount, states, actions, observations, state_names, observability
 
 ## Documentation for a function.
 ## This function uses the root of a parsed XML POMDPx file, parses it and returns initial belief over states.
