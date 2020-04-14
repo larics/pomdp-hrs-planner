@@ -2,6 +2,8 @@
 <launch>
 
   <node name="toppra_trajectory_generator" pkg="topp_ros" type="generate_toppra_trajectory.py"/>
+  
+  <param name="room_coordinates_file" value="$(find pomdp_hrs_planner)/config/room_coordinates.yaml"/>
   <node name="building_tour" pkg="pomdp_hrs_planner" type="waypoints.py" output="screen"/>
 
   <param name="human_loc" value="room2"/>

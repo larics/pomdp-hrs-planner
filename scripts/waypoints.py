@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import copy, time
+import copy, time, yaml
 
 # Ros imports
 import rospy
@@ -13,20 +13,26 @@ from std_msgs.msg import String
 class SingleAgentBuildingTour():
 
 	def __init__(self):
-		self.trajectory_pub = rospy.Publisher('UAV1/multi_dof_trajectory', MultiDOFJointTrajectory, queue_size=1)
-		self.locations = {'start':[4.0, -9.0, 1.0, 0.0],'room1_inside':[1.5, -9.0, 1.0, 0.0], 'room1_outside':[4.75, -9.0, 1.0, 0.0], 'room2_inside':[1.5, -3.5, 1.0, 0.0], 'room2_outside':[4.75, -3.5, 1.0, 0.0], 'room3_inside':[1.5, 0.0, 1.0, 0.0], 'room3_outside':[4.75, 0.0, 1.0, 0.0], 'room9_inside':[8.0, -5.75, 1.0, 0.0], 'room9_outside':[4.75, -5.75, 1.0, 0.0], 'room10_inside':[8.0, -9.0, 1.0, 0.0], 'room10_outside':[4.75, -9.0, 1.0, 0.0]}
+		locations_config = rospy.get_param("/room_coordinates_file")
+		with open(locations_config, 'r') as yaml_stream:
+			try:
+				self.locations = yaml.load(yaml_stream, Loader=yaml.CLoader)
+			except yaml.YAMLError as e:
+				print(e)
 		self.action = 'None'
 		self.previous_action = 'None'
 		self.trajectory = []
 		
 	def start(self):
 		rospy.Subscriber("action", String, self.action_callback)
+		self.trajectory_pub = rospy.Publisher('UAV1/multi_dof_trajectory', MultiDOFJointTrajectory, queue_size=5)
 		rospy.spin()
 		
 	def action_callback(self, msg):
 		self.previous_action = self.action
 		self.action = msg.data
 		self.define_trajectory_points()
+		time.sleep(5)
 		self.trajectory_pub.publish(self.trajectory)
 
 	def define_trajectory_points(self):
@@ -52,7 +58,6 @@ class SingleAgentBuildingTour():
 				z = [self.locations['room' + previous_action_no + '_inside'][2], self.locations['room' + previous_action_no + '_outside'][2], self.locations['start'][2]]
 				yaw = [self.locations['room' + previous_action_no + '_inside'][3], self.locations['room' + previous_action_no + '_outside'][3], self.locations['start'][3]]		
 		self.request_trajectory(x,y,z,yaw)
-		print x, y, z, yaw
 		
 				
 	def request_trajectory(self, x ,y ,z , yaw):
@@ -68,8 +73,8 @@ class SingleAgentBuildingTour():
 		for i in range(0, len(x)):
 			waypoint.positions = [x[i], y[i], z[i], yaw[i]]
 			if i==0:
-				waypoint.velocities = [2, 2, 2, 1]
-				waypoint.accelerations = [1.25, 1.25, 1.25, 1]
+				waypoint.velocities = [1, 1, 1, 1]
+				waypoint.accelerations = [0.6, 0.6, 0.6, 1]
 			request.waypoints.points.append(copy.deepcopy(waypoint))
 		request.waypoints.joint_names = ["x", "y", "z", "yaw"]
 		request.sampling_frequency = 100.0
