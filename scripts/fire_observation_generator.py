@@ -36,18 +36,18 @@ class ObservationGenerator():
 		rospy.Subscriber("room3/container", String, self.contain_callback_3)
 		rospy.Subscriber("room9/container", String, self.contain_callback_9)
 		rospy.Subscriber("room10/container", String, self.contain_callback_10)
-		self.pub = rospy.Publisher('action', String, queue_size=0)
+		self.pub = rospy.Publisher('action', String, queue_size=1)
 		self.dummy_obs()
 		rospy.spin()
 
 	def dummy_obs(self):
-		rospy.wait_for_service('get_new_action')
+		rospy.wait_for_service('POMDP1/get_new_action')
 		try:
-			new_action = rospy.ServiceProxy('get_new_action', GetNewAction)
+			new_action = rospy.ServiceProxy('POMDP1/get_new_action', GetNewAction)
 			response = new_action(['None', 'None'])
 		except rospy.ServiceException, e:
 			print "Service call failed: %s" % e
-
+		
 		message = String()
 		message.data = response.Act
 		self.pub.publish(message)
@@ -133,9 +133,9 @@ class ObservationGenerator():
 		if not self.done:
 			unit_name = msg.data.split("::")[0]
 			obs = self.get_observation(unit_name)
-			rospy.wait_for_service('get_new_action')
+			rospy.wait_for_service('POMDP1/get_new_action')
 			try:
-				new_action = rospy.ServiceProxy('get_new_action', GetNewAction)
+				new_action = rospy.ServiceProxy('POMDP1/get_new_action', GetNewAction)
 				response = new_action(obs)
 				# print(response.Act)
 			except rospy.ServiceException, e:
@@ -143,8 +143,6 @@ class ObservationGenerator():
 			message = String()
 			message.data = response.Act
 			self.pub.publish(message)
-
-
 
 	def contain_callback_1(self, msg):
 		self.room = "room1"
@@ -165,8 +163,6 @@ class ObservationGenerator():
 	def contain_callback_10(self, msg):
 		self.room = "room10"
 		self.process_msg(msg)
-
-
 
 
 if __name__ == '__main__':

@@ -4,16 +4,16 @@
 
 	<Description> Pomdp for a UAV agent in a tour of the building  </Description>
 
-	<Discount>0.95</Discount>
+	<Discount>0.85</Discount>
 
 	<Variable>
 	
 		<StateVar vnamePrev="room_0" vnameCurr="room_1" fullyObs="true">
-			<NumValues>r1 r2 r3 r4 r5 h</NumValues>
+			<ValueEnum>r1 r2 r3 r4 r5 h</ValueEnum>
 		</StateVar>
 		
 		<StateVar vnamePrev="fire_0" vnameCurr="fire_1">
-			<NumValues>f1 f2 f3 f4 f5</NumValues>
+			<ValueEnum>f1 f2 f3 f4 f5</ValueEnum>
 		</StateVar>
 		
 		<ObsVar vname="obs_fire">
@@ -46,7 +46,7 @@
             <Parameter type = "TBL">
                 <Entry>
                     <Instance>-</Instance>
-                    <ProbTable>0.2 0.2 0.2 0.2 0.2 </ProbTable>
+                    <ProbTable>0.2 0.2 0.2 0.2 0.2</ProbTable>
                 </Entry>
             </Parameter>
         </CondProb>
@@ -129,8 +129,8 @@
             <Var>fire_1</Var>
             <Parent>action_room fire_0</Parent>
             <Parameter type = "TBL">
-                <Entry>
-                    <Instance>* - -</Instance>
+                 <Entry>
+                    <Instance>scout1 - -</Instance>
                     <ProbTable>
                         1.0 0.0 0.0 0.0 0.0
                         0.0 1.0 0.0 0.0 0.0
@@ -139,9 +139,59 @@
                         0.0 0.0 0.0 0.0 1.0
                     </ProbTable>
                 </Entry>
+                <Entry>
+                    <Instance>scout2 - -</Instance>
+                    <ProbTable>
+                        1.0 0.0 0.0 0.0 0.0
+                        0.0 1.0 0.0 0.0 0.0
+                        0.0 0.0 1.0 0.0 0.0
+                        0.0 0.0 0.0 1.0 0.0
+                        0.0 0.0 0.0 0.0 1.0
+                    </ProbTable>
+                </Entry>
+                <Entry>
+                    <Instance>scout3 - -</Instance>
+                    <ProbTable>
+                        1.0 0.0 0.0 0.0 0.0
+                        0.0 1.0 0.0 0.0 0.0
+                        0.0 0.0 1.0 0.0 0.0
+                        0.0 0.0 0.0 1.0 0.0
+                        0.0 0.0 0.0 0.0 1.0
+                    </ProbTable>
+                </Entry>
+                <Entry>
+                    <Instance>scout4 - -</Instance>
+                    <ProbTable>
+                        1.0 0.0 0.0 0.0 0.0
+                        0.0 1.0 0.0 0.0 0.0
+                        0.0 0.0 1.0 0.0 0.0
+                        0.0 0.0 0.0 1.0 0.0
+                        0.0 0.0 0.0 0.0 1.0
+                    </ProbTable>
+                </Entry>
+                <Entry>
+                    <Instance>scout5 - -</Instance>
+                    <ProbTable>
+                        1.0 0.0 0.0 0.0 0.0
+                        0.0 1.0 0.0 0.0 0.0
+                        0.0 0.0 1.0 0.0 0.0
+                        0.0 0.0 0.0 1.0 0.0
+                        0.0 0.0 0.0 0.0 1.0
+                    </ProbTable>
+                </Entry>
+                <Entry>
+                    <Instance>end - -</Instance>
+                    <ProbTable>
+                        0.2 0.2 0.2 0.2 0.2
+                        0.2 0.2 0.2 0.2 0.2
+                        0.2 0.2 0.2 0.2 0.2
+                        0.2 0.2 0.2 0.2 0.2
+                        0.2 0.2 0.2 0.2 0.2
+                    </ProbTable>
+                </Entry>
             </Parameter>
-     </StateTransitionFunction>
-     
+            </CondProb>
+     </StateTransitionFunction>    
 
 	<ObsFunction>        
 		<CondProb>
@@ -149,9 +199,8 @@
             <Parent>action_room fire_1</Parent>
             <Parameter type = "TBL">
                 <Entry>
-                    <Instance> scout1 - -</Instance>
+                    <Instance>scout1 - -</Instance>
                     <ProbTable>
-              <!--video thermal none unknown-->
                     0.45 0.45 0.09 0.01
                     0.045 0.045 0.9 0.01
                     0.045 0.045 0.9 0.01
@@ -160,7 +209,7 @@
                     </ProbTable>
                 </Entry>
                 <Entry>
-                    <Instance> scout2 - -</Instance>
+                    <Instance>scout2 - -</Instance>
                     <ProbTable>
                     0.045 0.045 0.9 0.01
                     0.45 0.45 0.09 0.01
@@ -170,7 +219,7 @@
                     </ProbTable>
                 </Entry>
                 <Entry>
-                    <Instance> scout3 - -</Instance>
+                    <Instance>scout3 - -</Instance>
                     <ProbTable>
                     0.045 0.045 0.9 0.01
                     0.045 0.045 0.9 0.01
@@ -180,7 +229,7 @@
                     </ProbTable>
                 </Entry>
                 <Entry>
-                    <Instance> scout4 - -</Instance>
+                    <Instance>scout4 - -</Instance>
                     <ProbTable>
                     0.045 0.045 0.9 0.01
                     0.045 0.045 0.9 0.01
@@ -190,7 +239,7 @@
                     </ProbTable>
                 </Entry>
                 <Entry>
-                    <Instance> scout5 - -</Instance>
+                    <Instance>scout5 - -</Instance>
                     <ProbTable>
                     0.045 0.045 0.9 0.01
                     0.045 0.045 0.9 0.01
@@ -200,173 +249,208 @@
                     </ProbTable>
                 </Entry>
                 <Entry>
-                    <Instance> end - -</Instance>
+                    <Instance>end - -</Instance>
                     <ProbTable>
                     0.045 0.045 0.9 0.01
                     0.045 0.045 0.9 0.01
                     0.045 0.045 0.9 0.01
                     0.045 0.045 0.9 0.01
                     0.045 0.045 0.9 0.01
+                    </ProbTable>
+                </Entry>
+                <Entry>
+                    <Instance>end - -</Instance>
+                    <ProbTable>
+                    0.25 0.25 0.25 0.25
+                    0.25 0.25 0.25 0.25
+                    0.25 0.25 0.25 0.25
+                    0.25 0.25 0.25 0.25
+                    0.25 0.25 0.25 0.25
                     </ProbTable>
                 </Entry>
             </Parameter>
         </CondProb>
     </ObsFunction>
 
+
 <RewardFunction>
-		<Func>
+        <Func>
             <Var>reward_agent_fire</Var>
             <Parent>action_room fire_0</Parent>
             <Parameter type = "TBL">
-		<Entry>
+        <Entry>
                 <Instance>scout1 f1</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 f1</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout3 f1</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 f1</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout5 f1</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end f1</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>17</ValueTable>
                 </Entry>
           <Entry>
                 <Instance>scout1 f2</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 f2</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout3 f2</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 f2</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout5 f2</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end f2</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>17</ValueTable>
                 </Entry>
-		<Entry>
+        <Entry>
                 <Instance>scout1 f3</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 f3</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout3 f3</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 f3</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout5 f3</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end f3</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>17</ValueTable>
                 </Entry>
-		<Entry>
+        <Entry>
                 <Instance>scout1 f4</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 f4</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout3 f4</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 f4</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout5 f4</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end f4</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>17</ValueTable>
                 </Entry>
-		<Entry>
+        <Entry>
                 <Instance>scout1 f5</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 f5</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout3 f5</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 f5</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout5 f5</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>2</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end f5</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>17</ValueTable>
                 </Entry>
             </Parameter>
         </Func>
         <Func>
-            <Var>reward_agent_location</Var>
+            <Var>reward_location_agent</Var>
             <Parent>action_room room_0</Parent>
             <Parameter type = "TBL">
-		<Entry>
-                <Instance>scout1 r1</Instance>
+        <Entry>
+                <Instance>scout1 h</Instance>
+                <ValueTable>2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout2 h</Instance>
                 <ValueTable>-2</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout3 h</Instance>
+                <ValueTable>-5</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout4 h</Instance>
+                <ValueTable>-5</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>scout5 h</Instance>
+                <ValueTable>1</ValueTable>
+                </Entry>
+                <Entry>
+                <Instance>end h</Instance>
+                <ValueTable>-100</ValueTable>
+                </Entry>
+        <Entry>
+                <Instance>scout1 r1</Instance>
+                <ValueTable>-5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 r1</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout3 r1</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 r1</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout5 r1</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>3</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end r1</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>-10</ValueTable>
                 </Entry>
           <Entry>
                 <Instance>scout1 r2</Instance>
@@ -374,11 +458,11 @@
                 </Entry>
                 <Entry>
                 <Instance>scout2 r2</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout3 r2</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 r2</Instance>
@@ -390,11 +474,11 @@
                 </Entry>
                 <Entry>
                 <Instance>end r2</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>-10</ValueTable>
                 </Entry>
-		<Entry>
+        <Entry>
                 <Instance>scout1 r3</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 r3</Instance>
@@ -402,23 +486,23 @@
                 </Entry>
                 <Entry>
                 <Instance>scout3 r3</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 r3</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout5 r3</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end r3</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>-10</ValueTable>
                 </Entry>
-		<Entry>
+        <Entry>
                 <Instance>scout1 r4</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 r4</Instance>
@@ -430,27 +514,27 @@
                 </Entry>
                 <Entry>
                 <Instance>scout4 r4</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout5 r4</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end r4</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>-10</ValueTable>
                 </Entry>
-		<Entry>
+        <Entry>
                 <Instance>scout1 r5</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout2 r5</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>1</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout3 r5</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>0</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>scout4 r5</Instance>
@@ -458,11 +542,11 @@
                 </Entry>
                 <Entry>
                 <Instance>scout5 r5</Instance>
-                <ValueTable>-2</ValueTable>
+                <ValueTable>-5</ValueTable>
                 </Entry>
                 <Entry>
                 <Instance>end r5</Instance>
-                <ValueTable>2</ValueTable>
+                <ValueTable>-10</ValueTable>
                 </Entry>
             </Parameter>
         </Func>
