@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <launch>
+
+  <node name="toppra_trajectory_generator" pkg="topp_ros" type="generate_toppra_trajectory.py"/>
+  <node name="building_tour" pkg="pomdp_hrs_planner" type="waypoints.py" output="screen"/>
+
   <param name="human_loc" value="room2"/>
   <param name="fire_loc" value="room3"/>
   <param name="team_config_file" value="$(find pomdp_hrs_planner)/config/team_abilities.yaml"/>
@@ -9,6 +13,7 @@
 	<node name="observer" pkg="pomdp_hrs_planner" type="fire_observation_generator.py" output="screen">
         <param name="room" value="fire"/>
   </node>
+  
 	<!-- <include file="$(find larics_gazebo_worlds)/launch/floor_plan_simple.launch">
 		<arg name="args" value=""/>
 	</include>
