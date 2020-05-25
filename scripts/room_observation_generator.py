@@ -104,7 +104,7 @@ class ObservationGenerator():
 		
 		return obs_human, obs_fire
 
-	'''def publish_action(self, action):
+	def publish_action(self, action):
 		if not action == 'done':
 			message = MissionCtrlMsg()
 			message.type = "NewMission"
@@ -120,7 +120,7 @@ class ObservationGenerator():
 			self.pub.publish(message)
 		else:
 			print("%s clear" % self.room)
-			self.done = True '''
+			self.done = True 
 
 
 

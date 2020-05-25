@@ -29,6 +29,7 @@ class ObservationGenerator():
 		self.proximity_map_fire = self.obs_config['proximity_map_fire']
 		self.done = False
 		self.enable_proximity = False
+		self.pub = {}
 
 	def start(self):
 		rospy.Subscriber("room1/container", String, self.contain_callback_1)
@@ -36,21 +37,24 @@ class ObservationGenerator():
 		rospy.Subscriber("room3/container", String, self.contain_callback_3)
 		rospy.Subscriber("room9/container", String, self.contain_callback_9)
 		rospy.Subscriber("room10/container", String, self.contain_callback_10)
-		self.pub = rospy.Publisher('action', String, queue_size=1)
+		
+		for agent in self.team:
+			self.pub[agent] = rospy.Publisher('%s/action' %agent, String, queue_size=1)
 		self.dummy_obs()
 		rospy.spin()
 
 	def dummy_obs(self):
-		rospy.wait_for_service('POMDP1/get_new_action')
-		try:
-			new_action = rospy.ServiceProxy('POMDP1/get_new_action', GetNewAction)
-			response = new_action(['None', 'None'])
-		except rospy.ServiceException, e:
-			print "Service call failed: %s" % e
+		for agent in self.team:
+			rospy.wait_for_service('%s/get_new_action' %agent)
+			try:
+				new_action = rospy.ServiceProxy('%s/get_new_action' %agent, GetNewAction)
+				response = new_action(['None', 'None'])
+			except rospy.ServiceException, e:
+				print "Service call failed: %s" % e
 		
-		message = String()
-		message.data = response.Act
-		self.pub.publish(message)
+			message = String()
+			message.data = response.Act
+			self.pub[agent].publish(message)
 
 	def get_observation(self, unit_name):
 		capabilities = self.team[unit_name]['capabilities']
@@ -107,7 +111,7 @@ class ObservationGenerator():
 			elif fire_visual or fire_thermal:
 				obs_fire = 'none'
 
-		print("[%s:] obs_human=%s, obs_fire=%s" %(self.room, obs_human, obs_fire))
+		print("[%s:][%s:] obs_human=%s, obs_fire=%s" %(unit_name, self.room, obs_human, obs_fire))
 		
 		return obs_human, obs_fire
 
@@ -133,16 +137,16 @@ class ObservationGenerator():
 		if not self.done:
 			unit_name = msg.data.split("::")[0]
 			obs = self.get_observation(unit_name)
-			rospy.wait_for_service('POMDP1/get_new_action')
+			rospy.wait_for_service('%s/get_new_action' %unit_name)
 			try:
-				new_action = rospy.ServiceProxy('POMDP1/get_new_action', GetNewAction)
+				new_action = rospy.ServiceProxy('%s/get_new_action' %unit_name, GetNewAction)
 				response = new_action(obs)
 				# print(response.Act)
 			except rospy.ServiceException, e:
 				print "Service call failed: %s" % e
 			message = String()
 			message.data = response.Act
-			self.pub.publish(message)
+			self.pub[unit_name].publish(message)
 
 	def contain_callback_1(self, msg):
 		self.room = "room1"

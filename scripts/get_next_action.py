@@ -167,7 +167,7 @@ class POMDP:
 	def service_server(self):
 		ser1 = rospy.Service('get_new_action', GetNewAction, self.handle_get_new_action)
 		# ser2 = rospy.Service('predict_next_action', PredictNextAction, self.handle_predict_next_action)
-		rospy.spin()
+		ser1.spin()
 
 if __name__ == '__main__':
 	rospy.init_node('get_new_action_server')

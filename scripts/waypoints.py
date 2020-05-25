@@ -7,7 +7,7 @@ import rospy
 from topp_ros.srv import GenerateTrajectory, GenerateTrajectoryRequest
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint, \
     MultiDOFJointTrajectory, MultiDOFJointTrajectoryPoint
-from geometry_msgs.msg import Transform, Twist
+from geometry_msgs.msg import Transform, Twist, PoseStamped
 from std_msgs.msg import String
 
 class SingleAgentBuildingTour():
@@ -24,8 +24,10 @@ class SingleAgentBuildingTour():
 		self.trajectory = []
 		
 	def start(self):
+		self.starting_pose = rospy.wait_for_message("pose", PoseStamped) #only need starting pose
+		self.locations['start'] = [self.starting_pose.pose.position.x, self.starting_pose.pose.position.y, self.starting_pose.pose.position.z, 0.0]
 		rospy.Subscriber("action", String, self.action_callback)
-		self.trajectory_pub = rospy.Publisher('UAV1/multi_dof_trajectory', MultiDOFJointTrajectory, queue_size=5)
+		self.trajectory_pub = rospy.Publisher('multi_dof_trajectory', MultiDOFJointTrajectory, queue_size=5)
 		rospy.spin()
 		
 	def action_callback(self, msg):
@@ -34,6 +36,9 @@ class SingleAgentBuildingTour():
 		self.define_trajectory_points()
 		time.sleep(5)
 		self.trajectory_pub.publish(self.trajectory)
+		
+	
+		
 
 	def define_trajectory_points(self):
 		if self.action != 'end':
@@ -49,14 +54,17 @@ class SingleAgentBuildingTour():
 				x = [self.locations['start'][0], self.locations['room' + action_no + '_outside'][0], self.locations['room' + action_no + '_inside'][0]]
 				y = [self.locations['start'][1], self.locations['room' + action_no + '_outside'][1], self.locations['room' + action_no + '_inside'][1]]
 				z = [self.locations['start'][2], self.locations['room' + action_no + '_outside'][2], self.locations['room' + action_no + '_inside'][2]]
-				yaw = [self.locations['start'][3], self.locations['room' + action_no + '_outside'][3], self.locations['room' + action_no + '_inside'][3]]						
+				yaw = [self.locations['start'][3], self.locations['room' + action_no + '_outside'][3], self.locations['room' + action_no + '_inside'][3]]
+					
 		else:
 			if self.previous_action !='None':
 				previous_action_no = self.previous_action.strip('scout')
 				x = [self.locations['room' + previous_action_no + '_inside'][0], self.locations['room' + previous_action_no + '_outside'][0], self.locations['start'][0]]
 				y = [self.locations['room' + previous_action_no + '_inside'][1], self.locations['room' + previous_action_no + '_outside'][1], self.locations['start'][1]]
 				z = [self.locations['room' + previous_action_no + '_inside'][2], self.locations['room' + previous_action_no + '_outside'][2], self.locations['start'][2]]
-				yaw = [self.locations['room' + previous_action_no + '_inside'][3], self.locations['room' + previous_action_no + '_outside'][3], self.locations['start'][3]]		
+				yaw = [self.locations['room' + previous_action_no + '_inside'][3], self.locations['room' + previous_action_no + '_outside'][3], self.locations['start'][3]]
+				self.action = 'None'
+				self.previous_action = 'None'
 		self.request_trajectory(x,y,z,yaw)
 		
 				
@@ -66,8 +74,7 @@ class SingleAgentBuildingTour():
 			request_trajectory_service = rospy.ServiceProxy("generate_toppra_trajectory", GenerateTrajectory)
 			request = GenerateTrajectoryRequest()
 		except rospy.ServiceException, e:
-			print "Service call failed: %s" % e
-			
+			print "Service call failed: %s" % e	
 		
 		waypoint = JointTrajectoryPoint()
 		for i in range(0, len(x)):
