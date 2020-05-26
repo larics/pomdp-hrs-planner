@@ -83,6 +83,7 @@ class SingleAgentBuildingTour():
 				waypoint.velocities = [1, 1, 1, 1]
 				waypoint.accelerations = [0.6, 0.6, 0.6, 1]
 			request.waypoints.points.append(copy.deepcopy(waypoint))
+			request.waypoints.points.append(copy.deepcopy(waypoint))
 		request.waypoints.joint_names = ["x", "y", "z", "yaw"]
 		request.sampling_frequency = 100.0
 		request.n_gridpoints = 500
