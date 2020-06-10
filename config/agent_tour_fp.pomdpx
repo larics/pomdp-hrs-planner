@@ -4,7 +4,7 @@
 
 	<Description> Pomdp for a UAV agent in a tour of the building  </Description>
 
-	<Discount>0.85</Discount>
+	<Discount>0.9</Discount>
 
 	<Variable>
 	
@@ -46,7 +46,7 @@
             <Parameter type = "TBL">
                 <Entry>
                     <Instance>-</Instance>
-                    <ProbTable>0.2 0.2 0.2 0.2 0.2 </ProbTable>
+                    <ProbTable>0.2 0.2 0.2 0.2 0.2</ProbTable>
                 </Entry>
             </Parameter>
         </CondProb>
@@ -290,7 +290,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end f1</Instance>
-                <ValueTable>17</ValueTable>
+                <ValueTable>27</ValueTable>
                 </Entry>
           <Entry>
                 <Instance>scout1 f2</Instance>
@@ -314,7 +314,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end f2</Instance>
-                <ValueTable>17</ValueTable>
+                <ValueTable>27</ValueTable>
                 </Entry>
         <Entry>
                 <Instance>scout1 f3</Instance>
@@ -338,7 +338,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end f3</Instance>
-                <ValueTable>17</ValueTable>
+                <ValueTable>27</ValueTable>
                 </Entry>
         <Entry>
                 <Instance>scout1 f4</Instance>
@@ -362,7 +362,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end f4</Instance>
-                <ValueTable>17</ValueTable>
+                <ValueTable>27</ValueTable>
                 </Entry>
         <Entry>
                 <Instance>scout1 f5</Instance>
@@ -386,7 +386,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end f5</Instance>
-                <ValueTable>17</ValueTable>
+                <ValueTable>27</ValueTable>
                 </Entry>
             </Parameter>
         </Func>
@@ -416,7 +416,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end h</Instance>
-                <ValueTable>-100</ValueTable>
+                <ValueTable>-25</ValueTable>
                 </Entry>
         <Entry>
                 <Instance>scout1 r1</Instance>
@@ -440,7 +440,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end r1</Instance>
-                <ValueTable>-10</ValueTable>
+                <ValueTable>-20</ValueTable>
                 </Entry>
           <Entry>
                 <Instance>scout1 r2</Instance>
@@ -464,7 +464,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end r2</Instance>
-                <ValueTable>-10</ValueTable>
+                <ValueTable>-20</ValueTable>
                 </Entry>
         <Entry>
                 <Instance>scout1 r3</Instance>
@@ -488,7 +488,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end r3</Instance>
-                <ValueTable>-10</ValueTable>
+                <ValueTable>-20</ValueTable>
                 </Entry>
         <Entry>
                 <Instance>scout1 r4</Instance>
@@ -512,7 +512,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end r4</Instance>
-                <ValueTable>-10</ValueTable>
+                <ValueTable>-20</ValueTable>
                 </Entry>
         <Entry>
                 <Instance>scout1 r5</Instance>
@@ -536,7 +536,7 @@
                 </Entry>
                 <Entry>
                 <Instance>end r5</Instance>
-                <ValueTable>-10</ValueTable>
+                <ValueTable>-20</ValueTable>
                 </Entry>
             </Parameter>
         </Func>

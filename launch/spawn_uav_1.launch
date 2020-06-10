@@ -16,11 +16,11 @@
     <arg name="z" value="1" />
   </include>
 
-<!--  <include file="$(find mmuav_control)/launch/rotors_variation_attitude_position_control.launch">
+ <include file="$(find mmuav_control)/launch/rotors_variation_attitude_position_control.launch">
     <arg name="namespace" value="UAV1" />
     <arg name="x" value="5" />
     <arg name="y" value="-12" />
-  </include>-->
+  </include>
 
   <!--include file="$(find mmuav_description)/launch/spawn_uav.launch">
     <arg name="model_type" value="uav" />
