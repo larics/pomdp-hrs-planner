@@ -4,7 +4,8 @@ import numpy as np
 import xml.etree.ElementTree as ET 
 import copy
 from pomdp_hrs_planner.srv import *
-from std_msgs.msg import String
+from std_msgs.msg import String, Empty
+from consensus_ros.msg import BeliefStamped
 import rospy
 
 # class CopyPOMDP:
@@ -70,7 +71,12 @@ class POMDP:
 		self.belief = parser.get_initial_belief(root_model)
 		self.transition_probs = parser.get_matrix('StateTransitionFunction', root_model, self.observability)
 		self.observation_probs = parser.get_matrix('ObsFunction', root_model, self.observability)
+		self.pub = rospy.Publisher('belief', BeliefStamped, queue_size=1)
 		self.last_action = None
+		self.consensus_belief = []
+		rospy.Subscriber('consensus_belief', BeliefStamped, self.update_callback)
+		rospy.Subscriber('consensus', Empty, self.update_consensus)
+		self.consensus = 0
 		# self.pub = rospy.Publisher('action', String, queue_size=1)
 
 	def unpack_belief(self):
@@ -123,12 +129,24 @@ class POMDP:
 					self.belief[i] = O * next_state_prior
 			else:
 				self.belief[i] = next_state_prior
-
-
 			if np.linalg.norm(self.belief[i]) == 0:
 				self.belief[i] = next_state_prior
 			self.belief[i] /= np.sum(self.belief[i])
+		to_publish = BeliefStamped()
+		to_publish.header.stamp = rospy.Time.now()
+		to_publish.belief.data = self.belief[1]
+		self.pub.publish(to_publish)          
+		while not self.consensus:
+			pass           
+		self.belief =[self.belief[0], self.consensus_belief] 
+		self.consensus = 0
 		return self.belief
+		
+	def update_callback(self, data):
+		self.consensus_belief = data.belief.data
+		
+	def update_consensus(self, data):
+		self.consensus = 1
 
 	# def predict_most_likely_action(self, action):
 	# 	pomdp_c = CopyPOMDP(self)
@@ -149,7 +167,7 @@ class POMDP:
 	def handle_get_new_action(self, req):
 		if self.last_action:
 			self.update_belief(self.last_action, req.Obs)
-		# print("Updated belief after action %s and observation %s is: %s" % (self.last_action, req.Obs, self.belief))
+		print("Updated belief after action %s and observation %s is: %s" % (self.last_action, req.Obs, self.belief))
 		ActNum = self.get_optimal_action()
 		self.last_action = self.actions[0][ActNum]
 		# self.pub.publish(self.last_action)

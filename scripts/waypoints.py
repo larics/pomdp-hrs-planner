@@ -34,11 +34,9 @@ class SingleAgentBuildingTour():
 		self.previous_action = self.action
 		self.action = msg.data
 		self.define_trajectory_points()
-		time.sleep(5)
+		time.sleep(10)
 		self.trajectory_pub.publish(self.trajectory)
-		
-	
-		
+			
 
 	def define_trajectory_points(self):
 		if self.action != 'end':
@@ -64,7 +62,7 @@ class SingleAgentBuildingTour():
 				z = [self.locations['room' + previous_action_no + '_inside'][2], self.locations['room' + previous_action_no + '_outside'][2], self.locations['start'][2]]
 				yaw = [self.locations['room' + previous_action_no + '_inside'][3], self.locations['room' + previous_action_no + '_outside'][3], self.locations['start'][3]]
 				self.action = 'None'
-				self.previous_action = 'None'
+				self.previous_action = 'None'	
 		self.request_trajectory(x,y,z,yaw)
 		
 				
@@ -82,6 +80,7 @@ class SingleAgentBuildingTour():
 			if i==0:
 				waypoint.velocities = [1, 1, 1, 1]
 				waypoint.accelerations = [0.6, 0.6, 0.6, 1]
+			request.waypoints.points.append(copy.deepcopy(waypoint))
 			request.waypoints.points.append(copy.deepcopy(waypoint))
 		request.waypoints.joint_names = ["x", "y", "z", "yaw"]
 		request.sampling_frequency = 100.0
