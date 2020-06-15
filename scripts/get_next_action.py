@@ -71,10 +71,11 @@ class POMDP:
 		self.belief = parser.get_initial_belief(root_model)
 		self.transition_probs = parser.get_matrix('StateTransitionFunction', root_model, self.observability)
 		self.observation_probs = parser.get_matrix('ObsFunction', root_model, self.observability)
-		self.pub = rospy.Publisher('belief', BeliefStamped, queue_size=1)
+		#self.pub_belief = rospy.Publisher('belief', BeliefStamped, queue_size=1)
 		self.last_action = None
 		self.consensus_belief = []
-		rospy.Subscriber('consensus_belief', BeliefStamped, self.update_callback)
+		rospy.Subscriber('belief', BeliefStamped, self.update_callback)
+		self.pub = rospy.Publisher('consensus_belief', BeliefStamped, queue_size=1)
 		rospy.Subscriber('consensus', Empty, self.update_consensus)
 		self.consensus = 0
 		# self.pub = rospy.Publisher('action', String, queue_size=1)
@@ -135,11 +136,13 @@ class POMDP:
 		to_publish = BeliefStamped()
 		to_publish.header.stamp = rospy.Time.now()
 		to_publish.belief.data = self.belief[1]
-		self.pub.publish(to_publish)          
+		self.pub.publish(to_publish)
+		print("Belief prije consensusa %s i nakon akcije %s" % (self.belief[1], self.last_action))      
 		while not self.consensus:
-			pass           
+			pass          
 		self.belief =[self.belief[0], self.consensus_belief] 
 		self.consensus = 0
+		print("Belief nakon consensusa %s i nakon akcije %s" % (self.belief[1], self.last_action))  
 		return self.belief
 		
 	def update_callback(self, data):
@@ -167,7 +170,7 @@ class POMDP:
 	def handle_get_new_action(self, req):
 		if self.last_action:
 			self.update_belief(self.last_action, req.Obs)
-		print("Updated belief after action %s and observation %s is: %s" % (self.last_action, req.Obs, self.belief))
+		
 		ActNum = self.get_optimal_action()
 		self.last_action = self.actions[0][ActNum]
 		# self.pub.publish(self.last_action)
