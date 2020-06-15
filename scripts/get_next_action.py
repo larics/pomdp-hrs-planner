@@ -4,7 +4,7 @@ import numpy as np
 import xml.etree.ElementTree as ET 
 import copy
 from pomdp_hrs_planner.srv import *
-from std_msgs.msg import String, Empty
+from std_msgs.msg import String, Bool
 from consensus_ros.msg import BeliefStamped
 import rospy
 
@@ -76,7 +76,7 @@ class POMDP:
 		self.consensus_belief = []
 		rospy.Subscriber('belief', BeliefStamped, self.update_callback)
 		self.pub = rospy.Publisher('consensus_belief', BeliefStamped, queue_size=1)
-		rospy.Subscriber('consensus', Empty, self.update_consensus)
+		rospy.Subscriber('consensus', Bool, self.update_consensus)
 		self.consensus = 0
 		# self.pub = rospy.Publisher('action', String, queue_size=1)
 
@@ -137,9 +137,10 @@ class POMDP:
 		to_publish.header.stamp = rospy.Time.now()
 		to_publish.belief.data = self.belief[1]
 		self.pub.publish(to_publish)
-		print("Belief prije consensusa %s i nakon akcije %s" % (self.belief[1], self.last_action))      
+		print("Belief prije consensusa %s i nakon akcije %s" % (self.belief[1], self.last_action))
+		rospy.sleep(0.1)
 		while not self.consensus:
-			pass          
+			pass			         
 		self.belief =[self.belief[0], self.consensus_belief] 
 		self.consensus = 0
 		print("Belief nakon consensusa %s i nakon akcije %s" % (self.belief[1], self.last_action))  
@@ -149,7 +150,7 @@ class POMDP:
 		self.consensus_belief = data.belief.data
 		
 	def update_consensus(self, data):
-		self.consensus = 1
+		self.consensus = data.data
 
 	# def predict_most_likely_action(self, action):
 	# 	pomdp_c = CopyPOMDP(self)
