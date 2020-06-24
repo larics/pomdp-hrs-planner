@@ -111,6 +111,7 @@ class POMDP:
 		for i in range(len(self.policy_vectors)):
 			m = self.policy_vectors[i]
 			value = np.dot(belief, np.transpose(m))
+			
 			if self.observable_states[i] == observable_state and value > max_value:
 				max_value = value
 				max_index = index
@@ -143,7 +144,7 @@ class POMDP:
 			pass			         
 		self.belief =[self.belief[0], self.consensus_belief] 
 		self.consensus = 0
-		print("Belief nakon consensusa %s i nakon akcije %s" % (self.belief[1], self.last_action))  
+		print("Belief nakon consensusa %s i nakon akcije %s " % (self.belief[1], self.last_action))  
 		return self.belief
 		
 	def update_callback(self, data):
@@ -151,6 +152,7 @@ class POMDP:
 		
 	def update_consensus(self, data):
 		self.consensus = data.data
+		
 
 	# def predict_most_likely_action(self, action):
 	# 	pomdp_c = CopyPOMDP(self)
