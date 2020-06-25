@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Policy version="0.1" type="value" model="/home/fpetric/devel/test_ws/src/pomdp-hrs-planner/config/agent1_new.pomdpx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="policyx.xsd">
+<Policy version="0.1" type="value" model="/home/fpetric/devel/test_ws/src/pomdp-hrs-planner/config/agent1_final.pomdpx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="policyx.xsd">
 <AlphaVector vectorLength="6" numObsValue="6" numVectors="475">
 <Vector action="1" obsValue="0">116.612 111.804 109.171 109.836 110.349 110.018 </Vector>
 <Vector action="1" obsValue="0">116.253 112.032 109.417 112.015 110.843 110.256 </Vector>
