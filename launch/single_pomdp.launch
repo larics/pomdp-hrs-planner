@@ -2,11 +2,13 @@
 	 <!--<arg name="name" default="POMDP1"/>-->
      <arg name="pomdp_model" default="$(find pomdp_hrs_planner)/config/agent1.pomdpx" />
      <arg name="pomdp_policy" default="$(find pomdp_hrs_planner)/config/agent1.policyx" />
+     <arg name="consensus" default="0" />
 
      <!--<group ns="$(arg name)">-->
      	<node name="planner" pkg="pomdp_hrs_planner" type="get_next_action.py" output="screen">
      		<param name="model" value="$(arg pomdp_model)"/>
      		<param name="policy" value="$(arg pomdp_policy)"/>
+     		<param name="consensus" value="$(arg consensus)"/>
      	</node>
      <!--</group>-->
  </launch>
