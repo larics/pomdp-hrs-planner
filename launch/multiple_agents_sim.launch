@@ -20,21 +20,21 @@
   <node name="building_tour2" pkg="pomdp_hrs_planner" type="waypoints.py" output="screen"/>
   
   <param name="human_loc" value="room3"/>
-  <param name="fire_loc" value="room1"/>
+  <param name="fire_loc" value="room2"/>
   <param name="team_config_file" value="$(find pomdp_hrs_planner)/config/team_abilities_2.yaml"/>
   <param name="obs_config_file" value="$(find pomdp_hrs_planner)/config/obs_config.yaml"/>
 
   	<group ns="UAV1">
  	<include file="$(find pomdp_hrs_planner)/launch/single_pomdp.launch">
- 	     <arg name="pomdp_model" value="$(find pomdp_hrs_planner)/config/agent1_final.pomdpx" />
-     	<arg name="pomdp_policy" value="$(find pomdp_hrs_planner)/config/agent1_final.policyx" />
+ 	     <arg name="pomdp_model" value="$(find pomdp_hrs_planner)/config/agent1_10r.pomdpx" />
+     	<arg name="pomdp_policy" value="$(find pomdp_hrs_planner)/config/agent1_10r.policyx" />
      	<arg name="consensus" value="0" />
 	</include>
 	</group>
   	<group ns="UAV2">
  	<include file="$(find pomdp_hrs_planner)/launch/single_pomdp.launch">
- 		<arg name="pomdp_model" value="$(find pomdp_hrs_planner)/config/agent2_final.pomdpx" />
-     	<arg name="pomdp_policy" value="$(find pomdp_hrs_planner)/config/agent2_final.policyx" />
+ 		<arg name="pomdp_model" value="$(find pomdp_hrs_planner)/config/agent2_10r.pomdpx" />
+     	<arg name="pomdp_policy" value="$(find pomdp_hrs_planner)/config/agent2_10r.policyx" />
      	<arg name="consensus" value="0" />
 	</include>
 	</group>

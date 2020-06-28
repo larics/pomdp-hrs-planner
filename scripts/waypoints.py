@@ -62,7 +62,7 @@ class SingleAgentBuildingTour():
 				z = [self.locations['room' + previous_action_no + '_inside'][2], self.locations['room' + previous_action_no + '_outside'][2], self.locations['start'][2]]
 				yaw = [self.locations['room' + previous_action_no + '_inside'][3], self.locations['room' + previous_action_no + '_outside'][3], self.locations['start'][3]]
 				self.action = 'None'
-				self.previous_action = 'None'	
+				self.previous_action = 'None'
 		self.request_trajectory(x,y,z,yaw)
 		
 				

@@ -35,6 +35,11 @@ class ObservationGenerator():
 		rospy.Subscriber("room1/container", String, self.contain_callback_1)
 		rospy.Subscriber("room2/container", String, self.contain_callback_2)
 		rospy.Subscriber("room3/container", String, self.contain_callback_3)
+		rospy.Subscriber("room4/container", String, self.contain_callback_4)
+		rospy.Subscriber("room5/container", String, self.contain_callback_5)
+		rospy.Subscriber("room6/container", String, self.contain_callback_6)
+		rospy.Subscriber("room7/container", String, self.contain_callback_7)
+		rospy.Subscriber("room8/container", String, self.contain_callback_8)
 		rospy.Subscriber("room9/container", String, self.contain_callback_9)
 		rospy.Subscriber("room10/container", String, self.contain_callback_10)
 		
@@ -158,6 +163,26 @@ class ObservationGenerator():
 
 	def contain_callback_3(self, msg):
 		self.room = "room3"
+		self.process_msg(msg)
+	
+	def contain_callback_4(self, msg):
+		self.room = "room4"
+		self.process_msg(msg)
+	
+	def contain_callback_5(self, msg):
+		self.room = "room5"
+		self.process_msg(msg)
+	
+	def contain_callback_6(self, msg):
+		self.room = "room6"
+		self.process_msg(msg)
+		
+	def contain_callback_7(self, msg):
+		self.room = "room7"
+		self.process_msg(msg)
+	
+	def contain_callback_8(self, msg):
+		self.room = "room8"
 		self.process_msg(msg)
 
 	def contain_callback_9(self, msg):

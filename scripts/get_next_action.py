@@ -124,7 +124,7 @@ class POMDP:
 			while not self.consensus:
 				pass			         
 			self.belief =[self.belief[0], self.consensus_belief]
-			print("Belief prije update %s i nakon akcije %s" % (self.belief[1], self.last_action)) 
+			#print("Belief prije update %s i nakon akcije %s" % (self.belief[1], self.last_action)) 
 		for i in range(len(self.belief)):
 			T = self.transition_probs[i][action]
 			next_state_prior = np.dot(np.transpose(T), self.belief[i])
@@ -146,13 +146,18 @@ class POMDP:
 			to_publish.header.stamp = rospy.Time.now()
 			to_publish.belief.data = self.belief[1]
 			self.pub.publish(to_publish)
-			print("Belief prije consensusa %s i nakon akcije %s" % (self.belief[1], self.last_action))
+			#print("Belief prije consensusa %s i nakon akcije %s" % (self.belief[1], self.last_action))
 			rospy.sleep(0.1)
 			while not self.consensus:
 				pass			         
 			self.belief =[self.belief[0], self.consensus_belief] 
 			self.consensus = 0
-		print("Belief nakon consensusa %s i nakon akcije %s " % (self.belief[1], self.last_action))  
+		else: 
+			to_publish = BeliefStamped()
+			to_publish.header.stamp = rospy.Time.now()
+			to_publish.belief.data = self.belief[1]
+			self.pub.publish(to_publish)
+		#print("Belief nakon consensusa %s i nakon akcije %s " % (self.belief[1], self.last_action))  
 		return self.belief
 		
 	def update_callback(self, data):
