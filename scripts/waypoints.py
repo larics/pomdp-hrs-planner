@@ -13,12 +13,12 @@ from std_msgs.msg import String
 class SingleAgentBuildingTour():
 
 	def __init__(self):
-		locations_config = rospy.get_param("/room_coordinates_file")
+		locations_config = rospy.get_param("~room_coordinates_file")
 		with open(locations_config, 'r') as yaml_stream:
 			try:
 				self.locations = yaml.load(yaml_stream, Loader=yaml.CLoader)
 			except yaml.YAMLError as e:
-				print(e)
+				print(rospy.get_name(), e)
 		self.action = 'None'
 		self.previous_action = 'None'
 		self.trajectory = []
@@ -128,4 +128,3 @@ if __name__ == "__main__":
     rospy.init_node("Building_Tour")
     agent1 = SingleAgentBuildingTour()
     agent1.start()
-    

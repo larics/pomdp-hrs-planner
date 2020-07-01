@@ -79,6 +79,7 @@ class POMDP:
 		rospy.Subscriber('consensus', Bool, self.update_consensus)
 		self.consensus = 0
 		self.consensus_on = bool(rospy.get_param("~consensus"))
+		print(rospy.get_name(), 'Initialized')
 		# self.pub = rospy.Publisher('action', String, queue_size=1)
 
 	def unpack_belief(self):
@@ -124,7 +125,7 @@ class POMDP:
 			while not self.consensus:
 				pass			         
 			self.belief =[self.belief[0], self.consensus_belief]
-			#print("Belief prije update %s i nakon akcije %s" % (self.belief[1], self.last_action)) 
+			#print("Belief prije update %s i nakon akcije %s" % (self.belief[1], self.last_action))
 		for i in range(len(self.belief)):
 			T = self.transition_probs[i][action]
 			next_state_prior = np.dot(np.transpose(T), self.belief[i])
@@ -140,7 +141,6 @@ class POMDP:
 			if np.linalg.norm(self.belief[i]) == 0:
 				self.belief[i] = next_state_prior
 			self.belief[i] /= np.sum(self.belief[i])
-			
 		if self.consensus_on:
 			to_publish = BeliefStamped()
 			to_publish.header.stamp = rospy.Time.now()
@@ -157,7 +157,8 @@ class POMDP:
 			to_publish.header.stamp = rospy.Time.now()
 			to_publish.belief.data = self.belief[1]
 			self.pub.publish(to_publish)
-		#print("Belief nakon consensusa %s i nakon akcije %s " % (self.belief[1], self.last_action))  
+		#print("Belief nakon consensusa %s i nakon akcije %s " % (self.belief[1], self.last_action)) 
+		print('Belief %s after %s and consensus is %s' % (rospy.get_name(), self.last_action, self.belief[1][2])) 
 		return self.belief
 		
 	def update_callback(self, data):

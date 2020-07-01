@@ -19,6 +19,7 @@ class ObservationGenerator():
 				self.team = yaml.load(yaml_stream, Loader=yaml.CLoader)
 			except yaml.YAMLError as e:
 				print(e)
+		print(rospy.get_name(), self.team)
 		obs_config = rospy.get_param("/obs_config_file")
 		with open(obs_config, 'r') as yaml_stream:
 			try:
