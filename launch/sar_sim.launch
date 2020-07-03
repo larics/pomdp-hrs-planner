@@ -27,14 +27,14 @@
     <arg name="model_type" value="uav" />
     <arg name="name" value="UAV2" />
     <arg name="x" value="5" />
-    <arg name="y" value="-13" />
+    <arg name="y" value="-13.5" />
     <arg name="z" value="1" />
   </include>
 
   <include file="$(find mmuav_control)/launch/rotors_variation_attitude_position_control.launch">
     <arg name="namespace" value="UAV2" />
     <arg name="x" value="5" />
-    <arg name="y" value="-13" />
+    <arg name="y" value="-13.5" />
     <arg name="z" value="1" />
   </include>
 
@@ -42,14 +42,14 @@
     <arg name="model_type" value="uav" />
     <arg name="name" value="UAV3" />
     <arg name="x" value="5" />
-    <arg name="y" value="-14" />
+    <arg name="y" value="-15" />
     <arg name="z" value="1" />
   </include>
 
   <include file="$(find mmuav_control)/launch/rotors_variation_attitude_position_control.launch">
     <arg name="namespace" value="UAV3" />
     <arg name="x" value="5" />
-    <arg name="y" value="-14" />
+    <arg name="y" value="-15" />
     <arg name="z" value="1" />
   </include>
 	

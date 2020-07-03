@@ -3,7 +3,7 @@
 
 
   
-  <param name="human_loc" value="room3"/>
+  <param name="human_loc" value="room6"/>
   <param name="fire_loc" value="room2"/>
   <param name="team_config_file" value="$(find pomdp_hrs_planner)/config/team_abilities_2.yaml"/>
   <param name="obs_config_file" value="$(find pomdp_hrs_planner)/config/obs_config.yaml"/>
