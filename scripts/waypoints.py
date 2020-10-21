@@ -36,6 +36,7 @@ class SingleAgentBuildingTour():
 		self.define_trajectory_points()
 		time.sleep(10)
 		self.trajectory_pub.publish(self.trajectory)
+
 			
 
 	def define_trajectory_points(self):
@@ -63,7 +64,27 @@ class SingleAgentBuildingTour():
 				yaw = [self.locations['room' + previous_action_no + '_inside'][3], self.locations['room' + previous_action_no + '_outside'][3], self.locations['start'][3]]
 				self.action = 'None'
 				self.previous_action = 'None'
-		self.request_trajectory(x,y,z,yaw)
+
+		x_interpolated = []
+		y_interpolated = []
+		z_interpolated = []
+		yaw_interpolated = []
+
+		for i in range(len(x)-1):
+			for j in range(3):
+				x_interpolated.append(x[i]+j/3.0*(x[i+1]-x[i]))
+				y_interpolated.append(y[i]+j/3.0*(y[i+1]-y[i]))
+				z_interpolated.append(z[i]+j/3.0*(z[i+1]-z[i]))
+				yaw_interpolated.append(0.0)
+
+		x_interpolated.append(x[-1])
+		y_interpolated.append(y[-1])
+		z_interpolated.append(z[-1])
+		yaw_interpolated.append(0.0)
+
+		print('waypoints', x_interpolated, y_interpolated)
+
+		self.request_trajectory(x_interpolated, y_interpolated, z_interpolated, yaw_interpolated)
 		
 				
 	def request_trajectory(self, x ,y ,z , yaw):
@@ -79,12 +100,12 @@ class SingleAgentBuildingTour():
 			waypoint.positions = [x[i], y[i], z[i], yaw[i]]
 			if i==0:
 				waypoint.velocities = [1, 1, 1, 1]
-				waypoint.accelerations = [0.6, 0.6, 0.6, 1]
+				waypoint.accelerations = [0.2, 0.2, 0.2, 1]
 			request.waypoints.points.append(copy.deepcopy(waypoint))
-			request.waypoints.points.append(copy.deepcopy(waypoint))
+			# request.waypoints.points.append(copy.deepcopy(waypoint))
 		request.waypoints.joint_names = ["x", "y", "z", "yaw"]
-		request.sampling_frequency = 100.0
-		request.n_gridpoints = 500
+		request.sampling_frequency = 50.0
+		request.n_gridpoints = 100
 		request.plot = False
 		response = request_trajectory_service(request)
         	
