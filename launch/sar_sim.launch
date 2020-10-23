@@ -5,6 +5,7 @@
 	<include file="$(find pomdp_hrs_planner)/launch/multiple_obs_generators.launch">
 	</include>-->
 	<include file="$(find larics_gazebo_worlds)/launch/floor_plan_simple.launch">
+    <arg name="enable_gui" value="false"/>
 		<arg name="args" value=""/>
 	</include>
 
@@ -13,14 +14,14 @@
     <arg name="name" value="UAV1" />
     <arg name="x" value="5" />
     <arg name="y" value="-12" />
-    <arg name="z" value="1" />
+    <arg name="z" value="0.75" />
   </include>
 
   <include file="$(find mmuav_control)/launch/rotors_variation_attitude_position_control.launch">
     <arg name="namespace" value="UAV1" />
     <arg name="x" value="5" />
     <arg name="y" value="-12" />
-    <arg name="z" value="1" />
+    <arg name="z" value="0.75" />
   </include>
 
   <include file="$(find mmuav_description)/launch/spawn_uav.launch">
@@ -28,14 +29,14 @@
     <arg name="name" value="UAV2" />
     <arg name="x" value="5" />
     <arg name="y" value="-13.5" />
-    <arg name="z" value="1" />
+    <arg name="z" value="1.0" />
   </include>
 
   <include file="$(find mmuav_control)/launch/rotors_variation_attitude_position_control.launch">
     <arg name="namespace" value="UAV2" />
     <arg name="x" value="5" />
     <arg name="y" value="-13.5" />
-    <arg name="z" value="1" />
+    <arg name="z" value="1.0" />
   </include>
 
   <include file="$(find mmuav_description)/launch/spawn_uav.launch">
@@ -43,14 +44,14 @@
     <arg name="name" value="UAV3" />
     <arg name="x" value="5" />
     <arg name="y" value="-15" />
-    <arg name="z" value="1" />
+    <arg name="z" value="1.25" />
   </include>
 
   <include file="$(find mmuav_control)/launch/rotors_variation_attitude_position_control.launch">
     <arg name="namespace" value="UAV3" />
     <arg name="x" value="5" />
     <arg name="y" value="-15" />
-    <arg name="z" value="1" />
+    <arg name="z" value="1.25" />
   </include>
 	
 </launch>

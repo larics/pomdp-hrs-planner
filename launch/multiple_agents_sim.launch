@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <launch>
 
-
+  <arg name="fire_room" default="room2" />
   
   <param name="human_loc" value="room6"/>
-  <param name="fire_loc" value="room2"/>
+  <param name="fire_loc" value="$(arg fire_room)"/>
   <param name="team_config_file" value="$(find pomdp_hrs_planner)/config/team_abilities_2.yaml"/>
   <param name="obs_config_file" value="$(find pomdp_hrs_planner)/config/obs_config.yaml"/>
 
@@ -48,6 +48,7 @@
         <param name="room" value="fire"/>
   </node>
   
+  <include file="$(find consensus_ros)/launch/multiple_robots.launch"/>
 	<!-- <include file="$(find larics_gazebo_worlds)/launch/floor_plan_simple.launch">
 		<arg name="args" value=""/>
 	</include>

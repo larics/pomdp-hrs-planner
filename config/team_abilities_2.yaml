@@ -10,14 +10,14 @@ UAV1:
     neighbour: 0.0
 
   fire_visual_prob:
-    local: 1.0
+    local: 0.9
     neighbour: 0.0
 
   fire_thermal_prob:
-    local: 1.0
+    local: 0.9
     neighbour: 0.0
 
-  failure_prob: 0.0
+  failure_prob: 0.05
 
 UAV2:
   type: scout
@@ -31,14 +31,14 @@ UAV2:
     neighbour: 0.0
 
   fire_visual_prob:
-    local: 1.0
+    local: 0.9
     neighbour: 0.0
 
   fire_thermal_prob:
-    local: 1.0
+    local: 0.9
     neighbour: 0.0
 
-  failure_prob: 0.0
+  failure_prob: 0.05
 
 UAV3:
   type: scout
@@ -52,12 +52,12 @@ UAV3:
     neighbour: 0.0
 
   fire_visual_prob:
-    local: 1.0
+    local: 0.9
     neighbour: 0.0
 
   fire_thermal_prob:
-    local: 1.0
+    local: 0.9
     neighbour: 0.0
 
-  failure_prob: 0.0
+  failure_prob: 0.05
 

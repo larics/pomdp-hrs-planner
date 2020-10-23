@@ -19,7 +19,7 @@ class ObservationGenerator():
 				self.team = yaml.load(yaml_stream, Loader=yaml.CLoader)
 			except yaml.YAMLError as e:
 				print(e)
-		print(rospy.get_name(), self.team)
+		# print('[%s] %s' % (rospy.get_name(), self.team))
 		obs_config = rospy.get_param("/obs_config_file")
 		with open(obs_config, 'r') as yaml_stream:
 			try:
@@ -31,6 +31,7 @@ class ObservationGenerator():
 		self.done = False
 		self.enable_proximity = False
 		self.pub = {}
+		self.pub_obs = {}
 
 	def start(self):
 		rospy.Subscriber("room1/container", String, self.contain_callback_1)
@@ -46,6 +47,7 @@ class ObservationGenerator():
 		
 		for agent in self.team:
 			self.pub[agent] = rospy.Publisher('%s/action' %agent, String, queue_size=1)
+			self.pub_obs[agent] = rospy.Publisher('%s/observation' %agent, String, queue_size=1)
 		self.dummy_obs()
 		rospy.spin()
 
@@ -56,7 +58,7 @@ class ObservationGenerator():
 				new_action = rospy.ServiceProxy('%s/get_new_action' %agent, GetNewAction)
 				response = new_action(['None', 'None'])
 			except rospy.ServiceException, e:
-				print "Service call failed: %s" % e
+				print("Service call failed: %s" % e)
 		
 			message = String()
 			message.data = response.Act
@@ -117,7 +119,7 @@ class ObservationGenerator():
 			elif fire_visual or fire_thermal:
 				obs_fire = 'none'
 
-		print("[%s:][%s:] obs_human=%s, obs_fire=%s" %(unit_name, self.room, obs_human, obs_fire))
+		print("[%s][%s] obs_human=%s, obs_fire=%s" %(unit_name, self.room, obs_human, obs_fire))
 		
 		return obs_human, obs_fire
 
@@ -143,16 +145,20 @@ class ObservationGenerator():
 		if not self.done:
 			unit_name = msg.data.split("::")[0]
 			obs = self.get_observation(unit_name)
+			message = String()
+			message.data = obs[1]
+			self.pub_obs[unit_name].publish(message)
 			rospy.wait_for_service('%s/get_new_action' %unit_name)
 			try:
 				new_action = rospy.ServiceProxy('%s/get_new_action' %unit_name, GetNewAction)
 				response = new_action(obs)
 				# print(response.Act)
 			except rospy.ServiceException, e:
-				print "Service call failed: %s" % e
+				print("Service call failed: %s" % e)
 			message = String()
 			message.data = response.Act
 			self.pub[unit_name].publish(message)
+			
 
 	def contain_callback_1(self, msg):
 		self.room = "room1"

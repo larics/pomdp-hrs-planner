@@ -79,7 +79,7 @@ class POMDP:
 		rospy.Subscriber('consensus', Bool, self.update_consensus)
 		self.consensus = 0
 		self.consensus_on = bool(rospy.get_param("~consensus"))
-		print(rospy.get_name(), 'Initialized')
+		print("[%s] Initialized" % rospy.get_name())
 		# self.pub = rospy.Publisher('action', String, queue_size=1)
 
 	def unpack_belief(self):
@@ -158,7 +158,7 @@ class POMDP:
 			to_publish.belief.data = self.belief[1]
 			self.pub.publish(to_publish)
 		#print("Belief nakon consensusa %s i nakon akcije %s " % (self.belief[1], self.last_action)) 
-		print('Belief %s after %s and consensus is %s' % (rospy.get_name(), self.last_action, self.belief[1][2])) 
+		#print('Belief %s after %s and consensus is %s' % (rospy.get_name(), self.last_action, self.belief[1][2])) 
 		return self.belief
 		
 	def update_callback(self, data):
@@ -190,6 +190,7 @@ class POMDP:
 		
 		ActNum = self.get_optimal_action()
 		self.last_action = self.actions[0][ActNum]
+		print("[%s] Action %s" % (rospy.get_name(), self.last_action))
 		# self.pub.publish(self.last_action)
 		return GetNewActionResponse(self.last_action)
 

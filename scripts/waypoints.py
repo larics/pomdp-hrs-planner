@@ -82,7 +82,6 @@ class SingleAgentBuildingTour():
 		z_interpolated.append(z[-1])
 		yaw_interpolated.append(0.0)
 
-		print('waypoints', x_interpolated, y_interpolated)
 
 		self.request_trajectory(x_interpolated, y_interpolated, z_interpolated, yaw_interpolated)
 		
@@ -99,8 +98,8 @@ class SingleAgentBuildingTour():
 		for i in range(0, len(x)):
 			waypoint.positions = [x[i], y[i], z[i], yaw[i]]
 			if i==0:
-				waypoint.velocities = [1, 1, 1, 1]
-				waypoint.accelerations = [0.2, 0.2, 0.2, 1]
+				waypoint.velocities = [1.2, 1.2, 1.2, 1.2]
+				waypoint.accelerations = [0.2, 0.2, 0.2, 0.2]
 			request.waypoints.points.append(copy.deepcopy(waypoint))
 			# request.waypoints.points.append(copy.deepcopy(waypoint))
 		request.waypoints.joint_names = ["x", "y", "z", "yaw"]
